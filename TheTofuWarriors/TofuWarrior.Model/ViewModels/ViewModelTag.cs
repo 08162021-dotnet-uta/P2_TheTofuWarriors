@@ -1,5 +1,5 @@
 using System;
-namespace TheTofuWarriors
+namespace TheTofuWarrior.Model.ViewModels
 {
   public class ViewModelTag
   {

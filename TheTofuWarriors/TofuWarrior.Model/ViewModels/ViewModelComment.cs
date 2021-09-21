@@ -1,5 +1,5 @@
 using System;
-namespace TheTofuWarrior
+namespace TheTofuWarrior.Model.ViewModels
 {
 
   public class ViewModelComment
