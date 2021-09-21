@@ -1,0 +1,129 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+#trigger:
+#- main
+
+#pool:
+#  vmImage: 'windows-latest'
+
+#variables:
+#  solution: '**/*.sln'
+#  buildPlatform: 'Any CPU'
+#  buildConfiguration: 'Release'
+
+#steps:
+#- task: NuGetToolInstaller@1
+
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+
+#- task: VSBuild@1
+#  inputs:
+#    solution: '$(solution)'
+#    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+
+#- task: VSTest@2
+#  inputs:
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  pathToP1: projects/project_1/Project1.StoreApplication
+  pathToP1Sln: $(pathToP1)/Project1.StoreApplication.sln
+  buildConfiguration: 'Dev'
+  p1Package: $(Build.ArtifactStagingDirectory)
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - $(pathToP1)/*
+  
+
+pool:
+  vmImage: windows-latest
+
+stages:
+#  - stage: Build
+#    jobs:
+#      - job: buildJob
+#        steps:
+#          - task: UseDotNet@2
+#            inputs:
+#              version: '5.0.x'
+#          - task: DotNetCoreCLI@2
+#            displayName: 'install .NET 5 sdk'
+#            inputs:
+#              packageType: 'sdk'
+#              version: '5.0.x'
+#          - task: NuGetToolInstaller@1
+#          - task: NuGetCommand@2
+#            inputs:
+#              command: restore
+#              restoreSolution: '$(pathToSln)'
+#          - task: VSBuild@1
+#            inputs:
+#              solution: '$(pathToP1Sln)'
+#              msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
+            #vsVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 11.0
+            #msbuildArgs: # Optional
+            #platform: # Optional
+            #configuration: # Optional
+            #clean: false # Optional
+            #maximumCpuCount: false # Optional
+            #restoreNugetPackages: false # Optional
+            #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
+            #logProjectEvents: true # Optional
+            #createLogFile: false # Optional
+            #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
+#      - job: SonarCloud
+#        steps:
+- stage: Publish
+  jobs:
+  - job: publish
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        version: '5.0.x'
+#    - task: DotNetCoreCLI@2
+#      displayName: 'Publish p1'
+#      inputs:
+#        command: 'publish'
+#        publishWebProjects: true
+#        projects: $(pathToSln)
+#        zipAfterPublish: true
+    - task: VSBuild@1
+      inputs:
+        solution: '$(pathToP1Sln)'
+        #msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
+        msbuildArgs: '/t:Restore;Build /p:DeployIisAppPath="Project1-StoreApplication" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PublishProfile="$(PubXML.secureFilePath)" /p:PackageLocation="$(p1Package)"'
+    - script: 'ls -R "$(System.DefaultWorkingDirectory)"'
+      displayName: 'Show working files'
+    - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
+      displayName: 'Show staged files'
+#    - script: 'type "$(Build.ArtifactStagingDirectory)\Project1.StoreApplication.WebApi.deploy.cmd"'
+#      displayName: 'Show deploy cmd'
+    - task: DownloadSecureFile@1
+      name: PubXML
+      displayName: 'Download .pubxml for Deployment'
+      inputs:
+        #secureFile: 'Project1-StoreApplication - Web Deploy.pubxml'
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'PublishProfile'
+        #PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+        PublishProfilePath: '$(PubXML.secureFilePath)'
+        PublishProfilePassword: $(PublishPWD)
+        packageForLinux: '$(p1Package)/**/*.zip'
