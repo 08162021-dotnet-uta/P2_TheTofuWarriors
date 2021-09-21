@@ -46,17 +46,9 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("Comment", "App");
 
-                entity.Property(e => e.CommentId).HasColumnName("CommentID");
-
                 entity.Property(e => e.CommentText)
                     .IsRequired()
                     .HasMaxLength(500);
-
-                entity.Property(e => e.PrevCommentId).HasColumnName("PrevCommentID");
-
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.PrevComment)
                     .WithMany(p => p.InversePrevComment)
@@ -80,14 +72,8 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("Following", "App");
 
-                entity.HasIndex(e => new { e.FollowerId, e.InfluencerId }, "UNQ_Following_FollowerID_InfluencerID")
+                entity.HasIndex(e => new { e.FollowerId, e.InfluencerId }, "UNQ_Following_FollowerId_InfluencerId")
                     .IsUnique();
-
-                entity.Property(e => e.FollowingId).HasColumnName("FollowingID");
-
-                entity.Property(e => e.FollowerId).HasColumnName("FollowerID");
-
-                entity.Property(e => e.InfluencerId).HasColumnName("InfluencerID");
 
                 entity.HasOne(d => d.Follower)
                     .WithMany(p => p.FollowingFollowers)
@@ -109,8 +95,6 @@ namespace TofuWarrior.Storage
                 entity.HasIndex(e => e.Name, "UNQ_Ingredient_Name")
                     .IsUnique();
 
-                entity.Property(e => e.IngredientId).HasColumnName("IngredientID");
-
                 entity.Property(e => e.Description).HasMaxLength(100);
 
                 entity.Property(e => e.Name)
@@ -125,8 +109,6 @@ namespace TofuWarrior.Storage
                 entity.HasIndex(e => e.Unit, "UNQ_MeasureUnit_Name")
                     .IsUnique();
 
-                entity.Property(e => e.MeasureUnitId).HasColumnName("MeasureUnitID");
-
                 entity.Property(e => e.Description).HasMaxLength(100);
 
                 entity.Property(e => e.Unit)
@@ -138,14 +120,8 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("Rating", "App");
 
-                entity.HasIndex(e => new { e.UserId, e.RecipeId }, "UNQ_Rating_UserID_RecipeID")
+                entity.HasIndex(e => new { e.UserId, e.RecipeId }, "UNQ_Rating_UserId_RecipeId")
                     .IsUnique();
-
-                entity.Property(e => e.RatingId).HasColumnName("RatingID");
-
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Ratings)
@@ -164,10 +140,6 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("Recipe", "App");
 
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
-
-                entity.Property(e => e.CreatorUserId).HasColumnName("CreatorUserID");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -182,14 +154,6 @@ namespace TofuWarrior.Storage
             modelBuilder.Entity<RecipeIngredient>(entity =>
             {
                 entity.ToTable("RecipeIngredient", "App");
-
-                entity.Property(e => e.RecipeIngredientId).HasColumnName("RecipeIngredientID");
-
-                entity.Property(e => e.IngredientId).HasColumnName("IngredientID");
-
-                entity.Property(e => e.MeasureUnitId).HasColumnName("MeasureUnitID");
-
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
 
                 entity.HasOne(d => d.Ingredient)
                     .WithMany(p => p.RecipeIngredients)
@@ -214,14 +178,8 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("RecipeTag", "App");
 
-                entity.HasIndex(e => new { e.TagId, e.RecipeId }, "UNQ_RecipeTag_TagID_RecipeID")
+                entity.HasIndex(e => new { e.TagId, e.RecipeId }, "UNQ_RecipeTag_TagId_RecipeId")
                     .IsUnique();
-
-                entity.Property(e => e.RecipeTagId).HasColumnName("RecipeTagID");
-
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
-
-                entity.Property(e => e.TagId).HasColumnName("TagID");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeTags)
@@ -240,8 +198,6 @@ namespace TofuWarrior.Storage
             {
                 entity.ToTable("Tag", "App");
 
-                entity.Property(e => e.TagId).HasColumnName("TagID");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -256,8 +212,6 @@ namespace TofuWarrior.Storage
 
                 entity.HasIndex(e => e.Username, "UNQ_User_Username")
                     .IsUnique();
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -283,12 +237,6 @@ namespace TofuWarrior.Storage
             modelBuilder.Entity<UserRecipe>(entity =>
             {
                 entity.ToTable("UserRecipe", "App");
-
-                entity.Property(e => e.UserRecipeId).HasColumnName("UserRecipeID");
-
-                entity.Property(e => e.RecipeId).HasColumnName("RecipeID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.UserRecipes)
