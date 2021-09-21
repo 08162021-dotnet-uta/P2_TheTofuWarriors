@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TofuWarrior.Model", "TofuWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TofuWarrior.BusinessLogic", "TofuWarrior.BusinessLogic\TofuWarrior.BusinessLogic.csproj", "{CFA6F83E-F65F-4815-A455-B6C848528301}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TofuWarrior.Tests", "TofuWarriors.Tests\TofuWarrior.Tests.csproj", "{3BE8A2B7-966B-4E20-8094-27E8E2699B51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CFA6F83E-F65F-4815-A455-B6C848528301}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFA6F83E-F65F-4815-A455-B6C848528301}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFA6F83E-F65F-4815-A455-B6C848528301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE8A2B7-966B-4E20-8094-27E8E2699B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE8A2B7-966B-4E20-8094-27E8E2699B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE8A2B7-966B-4E20-8094-27E8E2699B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE8A2B7-966B-4E20-8094-27E8E2699B51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
