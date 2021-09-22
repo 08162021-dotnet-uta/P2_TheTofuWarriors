@@ -77,15 +77,6 @@ stages:
       displayName: 'Show working files'
     - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
       displayName: 'Show staged files'
-#    - script: 'type "$(Build.ArtifactStagingDirectory)\Project1.StoreApplication.WebApi.deploy.cmd"'
-#      displayName: 'Show deploy cmd'
-- stage: Publish
-  jobs:
-  - job: publish
-    steps:
-    - task: UseDotNet@2
-      inputs:
-        version: '5.0.x'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'PublishProfile'
@@ -93,3 +84,10 @@ stages:
         PublishProfilePath: '$(PubXML.secureFilePath)'
         PublishProfilePassword: $(PublishPWD)
         packageForLinux: '$(p2PackagePath)/**/*.zip'
+#- stage: Publish
+#  jobs:
+#  - job: publish
+#    steps:
+#    - task: UseDotNet@2
+#      inputs:
+#        version: '5.0.x'
