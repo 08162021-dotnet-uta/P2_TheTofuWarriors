@@ -38,10 +38,10 @@
 # https://aka.ms/yaml
 
 variables:
-  pathToP1: projects/project_1/Project1.StoreApplication
-  pathToP1Sln: $(pathToP1)/Project1.StoreApplication.sln
+  pathToAPI: TheTofuWarriors
+  pathToAPISln: $(pathToAPI)/TheTofuWarriors.sln
   buildConfiguration: 'Dev'
-  p1Package: $(Build.ArtifactStagingDirectory)
+  p2PackagePath: $(Build.ArtifactStagingDirectory)
 
 trigger:
   branches:
@@ -49,47 +49,36 @@ trigger:
     - main
   paths:
     include:
-    - $(pathToP1)/*
+    - $(pathToAPI)/*
   
 
 pool:
   vmImage: windows-latest
 
 stages:
-#  - stage: Build
-#    jobs:
-#      - job: buildJob
-#        steps:
-#          - task: UseDotNet@2
-#            inputs:
-#              version: '5.0.x'
-#          - task: DotNetCoreCLI@2
-#            displayName: 'install .NET 5 sdk'
-#            inputs:
-#              packageType: 'sdk'
-#              version: '5.0.x'
-#          - task: NuGetToolInstaller@1
-#          - task: NuGetCommand@2
-#            inputs:
-#              command: restore
-#              restoreSolution: '$(pathToSln)'
-#          - task: VSBuild@1
-#            inputs:
-#              solution: '$(pathToP1Sln)'
-#              msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
-            #vsVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 11.0
-            #msbuildArgs: # Optional
-            #platform: # Optional
-            #configuration: # Optional
-            #clean: false # Optional
-            #maximumCpuCount: false # Optional
-            #restoreNugetPackages: false # Optional
-            #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
-            #logProjectEvents: true # Optional
-            #createLogFile: false # Optional
-            #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
-#      - job: SonarCloud
-#        steps:
+- stage: Build
+  jobs:
+  - job: buildJob
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        version: '5.0.x'
+    - task: DownloadSecureFile@1
+      name: PubXML
+      displayName: 'Download .pubxml for Deployment'
+      inputs:
+        secureFile: 'Project1-StoreApplication-P2.pubxml'
+    - task: VSBuild@1
+      inputs:
+        solution: '$(pathToAPISln)'
+        #msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
+        msbuildArgs: '/t:Restore;Build /p:DeployIisAppPath="Project1-StoreApplication" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PublishProfile="$(PubXML.secureFilePath)" /p:PackageLocation="$(p2PackagePath)"'
+    - script: 'ls -R "$(System.DefaultWorkingDirectory)"'
+      displayName: 'Show working files'
+    - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
+      displayName: 'Show staged files'
+#    - script: 'type "$(Build.ArtifactStagingDirectory)\Project1.StoreApplication.WebApi.deploy.cmd"'
+#      displayName: 'Show deploy cmd'
 - stage: Publish
   jobs:
   - job: publish
@@ -97,33 +86,10 @@ stages:
     - task: UseDotNet@2
       inputs:
         version: '5.0.x'
-#    - task: DotNetCoreCLI@2
-#      displayName: 'Publish p1'
-#      inputs:
-#        command: 'publish'
-#        publishWebProjects: true
-#        projects: $(pathToSln)
-#        zipAfterPublish: true
-    - task: VSBuild@1
-      inputs:
-        solution: '$(pathToP1Sln)'
-        #msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
-        msbuildArgs: '/t:Restore;Build /p:DeployIisAppPath="Project1-StoreApplication" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PublishProfile="$(PubXML.secureFilePath)" /p:PackageLocation="$(p1Package)"'
-    - script: 'ls -R "$(System.DefaultWorkingDirectory)"'
-      displayName: 'Show working files'
-    - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
-      displayName: 'Show staged files'
-#    - script: 'type "$(Build.ArtifactStagingDirectory)\Project1.StoreApplication.WebApi.deploy.cmd"'
-#      displayName: 'Show deploy cmd'
-    - task: DownloadSecureFile@1
-      name: PubXML
-      displayName: 'Download .pubxml for Deployment'
-      inputs:
-        #secureFile: 'Project1-StoreApplication - Web Deploy.pubxml'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'PublishProfile'
         #PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
         PublishProfilePath: '$(PubXML.secureFilePath)'
         PublishProfilePassword: $(PublishPWD)
-        packageForLinux: '$(p1Package)/**/*.zip'
+        packageForLinux: '$(p2PackagePath)/**/*.zip'
