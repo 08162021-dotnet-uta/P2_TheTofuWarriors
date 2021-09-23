@@ -13,5 +13,8 @@ namespace TofuWarrior.BusinessLogic.Interfaces
         Task<ViewModelTag> GetTagByIdAsync(int tagId);
         Task<ViewModelTag> CreateTagAsync(ViewModelTag tag);
         Task<ViewModelTag> UpdateTagAsync(int tagId, ViewModelTag newTag);
+
+        Task<List<ViewModelTag>> GetTagsForRecipeAsync(int recipeId);
+        Task<ViewModelRecipe> AddTagToRecipeAsync(int recipeId, int tagId);
     }
 }

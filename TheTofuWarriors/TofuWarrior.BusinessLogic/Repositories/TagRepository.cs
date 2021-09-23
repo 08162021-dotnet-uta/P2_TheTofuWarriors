@@ -34,6 +34,20 @@ namespace TofuWarrior.BusinessLogic.Repositories
             return modelTag;
         }
 
+        private ViewModelRecipe ConvertToModel(Recipe r)
+        {
+            if (r == null) return null;
+            var recipe = new ViewModelRecipe();
+            recipe.RecipeId = r.RecipeId;
+            recipe.Instructions = r.Instructions;
+            recipe.CreatorUserId = r.CreatorUserId;
+            recipe.CreationTime = r.CreationTime;
+            recipe.Name = r.Name;
+            recipe.RecipeTags = (from rt in r.RecipeTags select ConvertToModel(rt.Tag)).ToList();
+
+            return recipe;
+        }
+
         /// <summary>
         /// Get all tags from storage
         /// </summary>
@@ -82,9 +96,41 @@ namespace TofuWarrior.BusinessLogic.Repositories
             return ConvertToModel(tag);
         }
 
-        public async Task<ViewModelRecipe> AddTagToRecipe(int tagId, int recipeId)
+        public async Task<List<ViewModelTag>> GetTagsForRecipeAsync(int recipeId)
         {
-            var tag = await _db.Tags.
+            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r).Include(r => r.RecipeTags).FirstAsync();
+            var tags = (from rt in recipe.RecipeTags select ConvertToModel(rt.Tag)).ToList();
+            return tags;
+        }
+
+        public async Task<ViewModelRecipe> AddTagToRecipeAsync(int recipeId, int tagId)
+        {
+            var tag = await GetDBTagByIdAsync(tagId);
+            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r).FirstAsync();
+            
+            // TODO: add some validation here
+            var link = new RecipeTag();
+            link.Recipe = recipe;
+            link.Tag = tag;
+
+            // save new recipeTags record to db to link recipe and tag
+            _db.RecipeTags.Add(link);
+            await _db.SaveChangesAsync();
+
+            // Might not need to reload here...
+            await _db.Entry(recipe).ReloadAsync();
+            return ConvertToModel(recipe);
         }
     }
+
+    /*
+    public interface IRecipeRepository
+    {
+        G
+    }
+
+    public class RecipeRepository : IRecipeRepository
+    {
+    }
+    */
 }
