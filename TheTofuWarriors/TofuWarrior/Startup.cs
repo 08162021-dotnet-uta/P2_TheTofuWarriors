@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TofuWarrior.BusinessLogic.Interfaces;
+using TofuWarrior.BusinessLogic.Repositories;
+using TofuWarrior.Storage;
 
 namespace TofuWarrior
 {
@@ -32,6 +35,9 @@ namespace TofuWarrior
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
             });
+
+            services.AddDbContext<TheTofuWarriorsDBContext>();
+            services.AddScoped<ITagRepository, TagRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
