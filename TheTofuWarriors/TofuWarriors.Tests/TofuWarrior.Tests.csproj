@@ -19,4 +19,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TofuWarrior.BusinessLogic\TofuWarrior.BusinessLogic.csproj" />
+    <ProjectReference Include="..\TofuWarrior.Model\TofuWarrior.Model.csproj" />
+    <ProjectReference Include="..\TofuWarrior.Storage\TofuWarrior.Storage.csproj" />
+    <ProjectReference Include="..\TofuWarrior\TofuWarrior.csproj" />
+  </ItemGroup>
+
 </Project>

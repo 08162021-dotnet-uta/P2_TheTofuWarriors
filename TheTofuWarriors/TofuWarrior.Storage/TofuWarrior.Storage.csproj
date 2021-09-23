@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TofuWarrior.Model\TofuWarrior.Model.csproj" />
+  </ItemGroup>
+
 </Project>
