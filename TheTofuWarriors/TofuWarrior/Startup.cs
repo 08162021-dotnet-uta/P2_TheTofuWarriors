@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TofuWarrior.Storage;
 
 namespace TofuWarrior
 {
@@ -28,11 +29,9 @@ namespace TofuWarrior
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
-            });
-        }
+           
+            var cs = Configuration.GetConnectionString("Default");
+            services.AddDBContext<TheTofuWarriorsDBContext>
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
