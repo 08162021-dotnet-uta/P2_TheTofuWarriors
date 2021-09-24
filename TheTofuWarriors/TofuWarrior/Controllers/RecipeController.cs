@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
-using TofuWarrior.BusinessLogic;
+using TofuWarrior.BusinessLogic.Interfaces;
 
 namespace TofuWarrior.Controllers
 {   [ApiController]

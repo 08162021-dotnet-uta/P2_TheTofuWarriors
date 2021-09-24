@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
 
-namespace TofuWarrior.BusinessLogic
+namespace TofuWarrior.BusinessLogic.Interfaces
 {
     public interface IRepository
     {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TheTofuWarrior.Model.ViewModels
 {
@@ -11,8 +12,8 @@ namespace TheTofuWarrior.Model.ViewModels
     public DateTime? CreationTime { get; set; }
 
 
-
-
+    public List<ViewModelTag> Tags { get; set; }
+    public List<ViewModelIngredient> Ingredients { get; set; }
 
 
   }

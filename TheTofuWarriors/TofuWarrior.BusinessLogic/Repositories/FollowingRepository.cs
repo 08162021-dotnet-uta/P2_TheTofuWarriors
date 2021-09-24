@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
 
-namespace TofuWarrior.BusinessLogic
+namespace TofuWarrior.BusinessLogic.Repositories
 {
-    public class FollowingRepository:IFollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private readonly TheTofuWarriorsDBContext _context;
         private readonly ILogger<FollowingRepository> _logger;

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
+using TofuWarrior.BusinessLogic.Interfaces;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {

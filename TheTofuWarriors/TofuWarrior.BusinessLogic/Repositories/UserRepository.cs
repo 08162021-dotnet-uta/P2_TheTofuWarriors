@@ -6,7 +6,7 @@ using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace TofuWarrior.BusinessLogic
+namespace TofuWarrior.BusinessLogic.Repositories
 {
   public class UserRepository : IUserRepository
   {
