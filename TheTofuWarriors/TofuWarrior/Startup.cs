@@ -12,9 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TofuWarrior.BusinessLogic;
 using TofuWarrior.BusinessLogic.Interfaces;
+using TofuWarrior.BusinessLogic;
 using TofuWarrior.Storage;
+
 
 namespace TofuWarrior
 {
@@ -31,22 +32,25 @@ namespace TofuWarrior
     public void ConfigureServices(IServiceCollection services)
     {
 
+
       services.AddControllers();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
       });
 
+
       services.AddDbContext<TheTofuWarriorsDBContext>(options =>
+      {
+        //if db options is already configured, done do anything..
+        // otherwise use the Connection string I have in secrets.json
+        if (!options.IsConfigured)
         {
-          if (!options.IsConfigured)
-          {
-            options.UseSqlServer("Server=08162021dotnetuta.database.windows.net;Database=TheTofuWarriorsDB;User Id=sqladmin;Password=Password12345;");
-          }
-
-
-        });
-
+          options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = TheTofuWarriorsDB; Trusted_Connection = True; ");
+        }
+      });
+      services.AddScoped<ICommentRepository, CommentRepository>();
+      services.AddScoped<IFollowingRepository, FollowingRepository>();
       services.AddScoped<IUserRepository, UserRepository>();
       services.AddScoped<IRatingRepository, RatingRepository>();
 
