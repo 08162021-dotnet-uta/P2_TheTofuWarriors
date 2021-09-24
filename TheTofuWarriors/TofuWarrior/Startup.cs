@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using TofuWarrior.BusinessLogic.Repositories;
 using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.BusinessLogic;
 using TofuWarrior.Storage;
@@ -53,6 +55,7 @@ namespace TofuWarrior
       services.AddScoped<IFollowingRepository, FollowingRepository>();
       services.AddScoped<IUserRepository, UserRepository>();
       services.AddScoped<IRatingRepository, RatingRepository>();
+      services.AddScoped<IRepository, RecipeRepo>();
 
     }
 
