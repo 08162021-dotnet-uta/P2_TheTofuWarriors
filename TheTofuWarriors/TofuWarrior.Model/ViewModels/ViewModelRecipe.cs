@@ -12,8 +12,8 @@ namespace TheTofuWarrior.Model.ViewModels
     public DateTime? CreationTime { get; set; }
 
 
-    public List<ViewModelTag> RecipeTags { get; set; }
-
+    public List<ViewModelTag> Tags { get; set; }
+    public List<ViewModelIngredient> Ingredients { get; set; }
 
 
   }

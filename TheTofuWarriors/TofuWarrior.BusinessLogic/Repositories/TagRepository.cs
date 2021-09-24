@@ -26,9 +26,13 @@ namespace TofuWarrior.BusinessLogic.Repositories
         private ViewModelTag ConvertToModel(Tag tag)
         {
             if (tag == null) return null;
-            var modelTag = new ViewModelTag();
-            modelTag.Name = tag.Name;
-            modelTag.TagId = tag.TagId;
+            var modelTag = new ViewModelTag()
+            {
+                Name = tag.Name,
+                TagId = tag.TagId
+            };
+            //modelTag.Name = tag.Name;
+            //modelTag.TagId = tag.TagId;
             // TODO: this should match -- I think we need to change ViewModelTag.TagType to be *short* to match the DB (jon)
             modelTag.TagType = (byte) tag.TagType;
             return modelTag;
@@ -43,7 +47,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
             recipe.CreatorUserId = r.CreatorUserId;
             recipe.CreationTime = r.CreationTime;
             recipe.Name = r.Name;
-            recipe.RecipeTags = (from rt in r.RecipeTags select ConvertToModel(rt.Tag)).ToList();
+            recipe.Tags = (from rt in r.RecipeTags select ConvertToModel(rt.Tag)).ToList();
 
             return recipe;
         }
