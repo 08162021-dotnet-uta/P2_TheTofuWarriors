@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TofuWarrior.BusinessLogic.Interfaces;
+using TofuWarrior.BusinessLogic;
+using TofuWarrior.Storage;
+using Microsoft.EntityFrameworkCore;
 
 namespace TofuWarrior
 {
@@ -32,6 +36,18 @@ namespace TofuWarrior
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
             });
+            services.AddDbContext<TheTofuWarriorsDBContext>(options =>
+            {
+                //if db options is already configured, done do anything..
+                // otherwise use the Connection string I have in secrets.json
+                if (!options.IsConfigured)
+                {
+                    options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = TheTofuWarriorsDB; Trusted_Connection = True; ");
+                }
+            });
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IFollowingRepository, FollowingRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
