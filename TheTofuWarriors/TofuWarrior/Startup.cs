@@ -41,9 +41,9 @@ namespace TofuWarrior
 
 			services.AddDbContext<TheTofuWarriorsDBContext>(options =>
 			{
-							//if db options is already configured, done do anything..
-							// otherwise use the Connection string I have in secrets.json
-							if (!options.IsConfigured)
+				//if db options is already configured, done do anything..
+				// otherwise use the Connection string I have in secrets.json
+				if (!options.IsConfigured)
 				{
 					options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = TheTofuWarriorsDB; Trusted_Connection = True; ");
 				}
