@@ -53,7 +53,8 @@ namespace TofuWarrior
       services.AddScoped<IUserRepository, UserRepository>();
       services.AddScoped<IRatingRepository, RatingRepository>();
       services.AddScoped<ITagRepository, TagRepository>();
-
+      services.AddScoped<IIngredientRepository, IngredientRepository>();
+      services.AddScoped<IMeasurementRepository, MeasurementRepository>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
