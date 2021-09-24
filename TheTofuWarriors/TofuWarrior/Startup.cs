@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TofuWarrior.BusinessLogic;
+using TofuWarrior.BusinessLogic.Repositories;
 using TofuWarrior.Storage;
+
 
 namespace TofuWarrior
 {
@@ -28,10 +32,27 @@ namespace TofuWarrior
         public void ConfigureServices(IServiceCollection services)
         {
 
+
             services.AddControllers();
-           
-            var cs = Configuration.GetConnectionString("Default");
-            services.AddDBContext<TheTofuWarriorsDBContext>
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
+            });
+
+
+            services.AddDbContext<TheTofuWarriorsDBContext>(options =>
+            {
+                //if db options is already configured, done do anything..
+                // otherwise use the Connection string I have in secrets.json
+                if (!options.IsConfigured)
+                {
+                    options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = TheTofuWarriorsDB; Trusted_Connection = True; ");
+                }
+            });
+            services.AddScoped<IRepository, RecipeRepo>();
+
+
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
