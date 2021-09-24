@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
 
-namespace TofuWarrior.BusinessLogic
+namespace TofuWarrior.BusinessLogic.Repositories
 {
     public class FollowingRepository:IFollowingRepository
     {
