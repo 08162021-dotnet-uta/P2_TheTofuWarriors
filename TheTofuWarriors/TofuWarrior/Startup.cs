@@ -52,6 +52,7 @@ namespace TofuWarrior
       services.AddScoped<IFollowingRepository, FollowingRepository>();
       services.AddScoped<IUserRepository, UserRepository>();
       services.AddScoped<IRatingRepository, RatingRepository>();
+      services.AddScoped<IRepository, RecipeRepo>();
       services.AddScoped<ITagRepository, TagRepository>();
       services.AddScoped<IIngredientRepository, IngredientRepository>();
       services.AddScoped<IMeasurementRepository, MeasurementRepository>();
