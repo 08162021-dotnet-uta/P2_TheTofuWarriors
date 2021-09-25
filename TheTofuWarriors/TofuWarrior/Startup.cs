@@ -37,6 +37,14 @@ namespace TofuWarrior
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
 			});
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy("Dev", builder =>
+				{
+					//builder.WithOrigins()
+				});
+			});
+
 
 			services.AddDbContext<TheTofuWarriorsDBContext>(options =>
 			{
