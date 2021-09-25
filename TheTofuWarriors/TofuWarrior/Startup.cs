@@ -31,7 +31,6 @@ namespace TofuWarrior
 		public void ConfigureServices(IServiceCollection services)
 		{
 
-
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
@@ -45,7 +44,7 @@ namespace TofuWarrior
 				// otherwise use the Connection string I have in secrets.json
 				if (!options.IsConfigured)
 				{
-					options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = TheTofuWarriorsDB; Trusted_Connection = True; ");
+					options.UseSqlServer(Configuration.GetConnectionString("TheTofuWarriorsDBConnStr"));
 				}
 			});
 			services.AddScoped<ICommentRepository, CommentRepository>();
