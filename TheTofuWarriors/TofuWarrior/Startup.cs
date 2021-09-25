@@ -41,7 +41,9 @@ namespace TofuWarrior
 			{
 				options.AddPolicy("Dev", builder =>
 				{
-					//builder.WithOrigins()
+					builder.WithOrigins("http://localhost:4200")
+					.AllowAnyHeader()
+					.AllowAnyMethod();
 				});
 			});
 
@@ -78,6 +80,8 @@ namespace TofuWarrior
 			app.UseHttpsRedirection();
 
 			app.UseRouting();
+
+			app.UseCors("Dev");
 
 			app.UseAuthorization();
 

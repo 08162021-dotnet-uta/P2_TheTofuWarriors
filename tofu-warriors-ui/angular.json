@@ -74,6 +74,7 @@
               "browserTarget": "tofu-warriors-ui:build:development"
             }
           },
+          "port": "4200",
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
