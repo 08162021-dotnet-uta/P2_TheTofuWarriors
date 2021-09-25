@@ -102,7 +102,14 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
         public async Task<List<ViewModelTag>> GetTagsForRecipeAsync(int recipeId)
         {
-            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r).Include(r => r.RecipeTags).FirstAsync();
+            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r)
+				.Include(r => r.RecipeTags)
+				.ThenInclude(rt => rt.Tag)
+				.FirstOrDefaultAsync();
+			if (recipe == null)
+			{
+				throw new ArgumentException("RecpieId is not valid");
+			}
             var tags = (from rt in recipe.RecipeTags select ConvertToModel(rt.Tag)).ToList();
             return tags;
         }
@@ -110,7 +117,10 @@ namespace TofuWarrior.BusinessLogic.Repositories
         public async Task<ViewModelRecipe> AddTagToRecipeAsync(int recipeId, int tagId)
         {
             var tag = await GetDBTagByIdAsync(tagId);
-            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r).FirstAsync();
+            var recipe = await (from r in _db.Recipes where r.RecipeId == recipeId select r)
+				.Include(r => r.RecipeTags)
+				.ThenInclude(rt => rt.Tag)
+				.FirstAsync();
             
             // TODO: add some validation here
             var link = new RecipeTag();
@@ -122,19 +132,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
             await _db.SaveChangesAsync();
 
             // Might not need to reload here...
-            await _db.Entry(recipe).ReloadAsync();
+            //await _db.Entry(recipe).ReloadAsync();
             return ConvertToModel(recipe);
         }
     }
 
-    /*
-    public interface IRecipeRepository
-    {
-        G
-    }
-
-    public class RecipeRepository : IRecipeRepository
-    {
-    }
-    */
 }
