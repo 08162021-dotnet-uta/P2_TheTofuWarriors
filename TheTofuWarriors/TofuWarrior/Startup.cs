@@ -37,6 +37,16 @@ namespace TofuWarrior
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "TofuWarrior", Version = "v1" });
 			});
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy("Dev", builder =>
+				{
+					builder.WithOrigins("http://localhost:4200")
+					.AllowAnyHeader()
+					.AllowAnyMethod();
+				});
+			});
+
 
 			services.AddDbContext<TheTofuWarriorsDBContext>(options =>
 			{
@@ -70,6 +80,8 @@ namespace TofuWarrior
 			app.UseHttpsRedirection();
 
 			app.UseRouting();
+
+			app.UseCors("Dev");
 
 			app.UseAuthorization();
 
