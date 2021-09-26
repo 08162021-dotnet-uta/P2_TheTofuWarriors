@@ -1,0 +1,27 @@
+<div id="login">   
+	<h1>Welcome Back!</h1>
+	
+	<form (submit)="login()">
+	
+		<div class="field-wrap">
+		<label>
+		UserName<span >:</span>
+		</label>
+		<input [(ngModel)]="userName" type="text" name="userName" required />
+	</div>
+	
+	<div class="field-wrap">
+		<label>
+			Password<span >:</span>
+		</label>
+		<input [(ngModel)]="password" name="password" type="password" required />
+	</div>
+	
+	
+	
+	<button class="button button-block">Log In</button>
+	
+	</form>
+
+</div>
+
