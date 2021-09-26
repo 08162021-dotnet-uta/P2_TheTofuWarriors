@@ -38,6 +38,9 @@ export class UsersService {
       password: pw,
 
     }
+    // use shareReplay operator to let multiple subscribers access same data
+    // will avoid multiple http requests when subscribed to multiple times
+    // To make another http request, logIn() function must be called again
     let result = this.http.post<User>(url,user,this.httpOptions).pipe(shareReplay())
     result.subscribe(data => this.currentUser = data);
     return result;
