@@ -2,6 +2,9 @@
 --SELECT * FROM App.MeasureUnit;
 --SELECT * FROM App.Ingredient;
 
+use TheTofuWarriorsDB;
+go
+
 INSERT INTO App.MeasureUnit (Unit, [Description])
 VALUES ('tsp', 'Teaspoon')
 	,('tbsp', 'Tablespoon')
