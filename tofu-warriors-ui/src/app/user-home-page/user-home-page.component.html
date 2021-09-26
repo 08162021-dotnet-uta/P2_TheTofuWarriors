@@ -1,0 +1,11 @@
+
+
+<div class="user-home-page">
+  <div *ngIf="this.currentUser">
+    <h2>Welcome, {{this.currentUser.firstName}} {{this.currentUser.lastName}}!</h2>
+    <button routerLink="/recipeSearch">Search Recipes</button>
+  </div>
+  <div *ngIf="!this.currentUser">
+    <h2>Please Log In</h2>
+  </div>
+</div>

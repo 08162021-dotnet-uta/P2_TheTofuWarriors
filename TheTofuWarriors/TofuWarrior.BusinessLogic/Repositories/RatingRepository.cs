@@ -5,6 +5,7 @@ using TofuWarrior.Storage;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Logging;
+using static TofuWarrior.BusinessLogic.Repositories.Mapper;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -17,17 +18,6 @@ namespace TofuWarrior.BusinessLogic.Repositories
       _dbc = dbc;
     }
 
-    private ViewModelRating ConvertToModel(Rating rating)
-    {
-      var modelRating = new ViewModelRating();
-      modelRating.RatingId = rating.RatingId;
-      modelRating.UserId = rating.UserId;
-      modelRating.RecipeId = rating.RecipeId;
-      modelRating.Score = rating.Score;
-
-      return modelRating;
-    }
-
     public async Task AddRatingAsync(ViewModelRating userRating)
     {
       var rating = await _dbc.Database.ExecuteSqlRawAsync("INSERT INTO App.Rating (UserID, RecipeId, Score) VALUES ({0},{1},{2})", userRating.UserId, userRating.RecipeId, userRating.Score);
@@ -37,7 +27,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
     {
       var rating = await _dbc.Ratings.FromSqlRaw("SELECT * FROM App.Rating WHERE Score = {0}", score).ToListAsync();
 
-      return rating.ConvertAll(this.ConvertToModel);
+      return rating.ConvertAll(ConvertToModel);
     }
 
 

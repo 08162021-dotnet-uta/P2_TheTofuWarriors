@@ -5,6 +5,7 @@ using TofuWarrior.Storage;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Logging;
+using static TofuWarrior.BusinessLogic.Repositories.Mapper;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -17,24 +18,11 @@ namespace TofuWarrior.BusinessLogic.Repositories
       _dbc = dbc;
     }
 
-    private ViewModelUser ConvertToModel(User user)
-    {
-      var modelUser = new ViewModelUser();
-      modelUser.UserId = user.UserId;
-      modelUser.FirstName = user.FirstName;
-      modelUser.LastName = user.LastName;
-      modelUser.Email = user.Email;
-      modelUser.UserName = user.Username;
-      modelUser.Password = user.Password;
-
-      return modelUser;
-    }
-
     public async Task<List<ViewModelUser>> UserListAsync()
     {
       var users = await _dbc.Users.FromSqlRaw("SELECT * FROM App.[User]").ToListAsync();
 
-      return users.ConvertAll(this.ConvertToModel);
+      return users.ConvertAll(ConvertToModel);
     }
 
     public async Task<ViewModelUser> UserLoginAsync(string username, string password)
@@ -42,7 +30,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
       var user = await _dbc.Users.FromSqlRaw("SELECT * FROM App.[User] WHERE Username = {0} and Password = {1}", username, password).FirstOrDefaultAsync();
 
-      return this.ConvertToModel(user);
+      return ConvertToModel(user);
     }
 
     public async Task RegisterAsync(ViewModelUser newUser)
@@ -55,7 +43,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
     {
       var user = await _dbc.Users.FromSqlRaw("SELECT * FROM App.[User] WHERE Username = {0}", username).FirstOrDefaultAsync();
 
-      return this.ConvertToModel(user);
+      return ConvertToModel(user);
 
     }
 

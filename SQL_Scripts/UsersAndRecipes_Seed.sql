@@ -1,3 +1,7 @@
+
+use TheTofuWarriorsDB;
+go
+
 INSERT INTO App.[User](FirstName,LastName,Email,Username,[Password])
 VALUES
 ('Star','Cloud','star@gmail.com','starandcloud','0234'),
