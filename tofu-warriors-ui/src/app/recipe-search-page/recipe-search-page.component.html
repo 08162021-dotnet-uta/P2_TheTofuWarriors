@@ -4,17 +4,24 @@
   <h1>Find a recipe: </h1>
   <div class="recipe-search">
 
+    <div class="recipe-search-status">
+      <p>{{status}}</p>
+    </div>
     <!-- input to get search term -->
-    <label for="recipe-search-value-input">Enter term to search for</label>
-    <input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>
+    <div>
+      <label for="recipe-search-value-input">Enter term to search for</label>
+      <input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>
+    </div>
 
     <!-- selector to get type of term (search based on recipe name/tag/etc) -->
-    <label for="recipe-search-type-selector">Choose search type</label>
-    <select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">
-      <option value="name_search">Name</option>
-      <option value="tag_search">Tag</option>
-      <option value="ingredient_search">Ingredient</option>
-    </select>
+    <div>
+      <label for="recipe-search-type-selector">Choose search type</label>
+      <select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">
+        <option value="name_search">Name</option>
+        <option value="tag_search">Tag</option>
+        <option value="ingredient_search">Ingredient</option>
+      </select>
+    </div>
 
     <button (click)="addSearchTerm()">Add to Search</button>
 

@@ -17,6 +17,7 @@ export class RecipeSearchPageComponent implements OnInit {
   searchTerms: any[] = [];
   curTerm: string = "";
   curType: string = "";
+  status: string = "";
 
   ngOnInit(): void {
   }
@@ -26,6 +27,12 @@ export class RecipeSearchPageComponent implements OnInit {
   }
 
   addSearchTerm() {
+    if (!this.curTerm || !this.curType) {
+      this.status = "Please enter term and select type";
+      return;
+    } else {
+      this.status = "";
+    }
     console.log(`Adding term ${this.curTerm}, ${this.curType}`);
     this.searchTerms.push({ value: this.curTerm, type: this.curType });
   }
