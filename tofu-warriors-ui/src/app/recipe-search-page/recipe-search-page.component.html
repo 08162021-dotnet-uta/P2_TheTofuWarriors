@@ -1,0 +1,30 @@
+
+
+<div>
+  <h1>Find a recipe: </h1>
+  <div class="recipe-search">
+
+    <!-- input to get search term -->
+    <label for="recipe-search-value-input">Enter term to search for</label>
+    <input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>
+
+    <!-- selector to get type of term (search based on recipe name/tag/etc) -->
+    <label for="recipe-search-type-selector">Choose search type</label>
+    <select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">
+      <option value="name_search">Name</option>
+      <option value="tag_search">Tag</option>
+      <option value="ingredient_search">Ingredient</option>
+    </select>
+
+    <button (click)="addSearchTerm()">Add to Search</button>
+
+    <!-- current list of terms -->
+    <div class="recipe-search-terms">
+      <ul>
+        <li *ngFor="let term of searchTerms">
+          <span class="recipe-search-term">{{term.value}} {{term.type}}</span> <button (click)="removeSearchTerm(term)"> Remove </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

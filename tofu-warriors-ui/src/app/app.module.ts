@@ -4,11 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { UserDisplayComponent } from './user-display/user-display.component';
+import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { RecipeSearchPageComponent } from './recipe-search-page/recipe-search-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserDisplayComponent
+    UserDisplayComponent,
+    UserHomePageComponent,
+    RecipeSearchPageComponent
   ],
   imports: [
     BrowserModule,
