@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
+using static TofuWarrior.BusinessLogic.Repositories.Mapper;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -19,17 +20,6 @@ namespace TofuWarrior.BusinessLogic.Repositories
             _db = db;
         }
 
-        private ViewModelMeasurement ConvertToModel(MeasureUnit measure)
-        {
-            if (measure == null) return null;
-            var model = new ViewModelMeasurement()
-            {
-                Description = measure.Description,
-                Unit = measure.Unit,
-                MeasureUnitId = measure.MeasureUnitId
-            };
-            return model;
-        }
 
         public async Task<List<ViewModelMeasurement>> GetAllMeasurements()
         {

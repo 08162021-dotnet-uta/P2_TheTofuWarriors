@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.Storage;
+using static TofuWarrior.BusinessLogic.Repositories.Mapper;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -16,40 +17,6 @@ namespace TofuWarrior.BusinessLogic.Repositories
         public TagRepository(TheTofuWarriorsDBContext db) : base()
         {
             _db = db;
-        }
-
-        /// <summary>
-        /// Convert from a database Tag object to a ViewModelTag object
-        /// </summary>
-        /// <param name="tag">Db object</param>
-        /// <returns>ViewModelTag</returns>
-        private ViewModelTag ConvertToModel(Tag tag)
-        {
-            if (tag == null) return null;
-            var modelTag = new ViewModelTag()
-            {
-                Name = tag.Name,
-                TagId = tag.TagId
-            };
-            //modelTag.Name = tag.Name;
-            //modelTag.TagId = tag.TagId;
-            // TODO: this should match -- I think we need to change ViewModelTag.TagType to be *short* to match the DB (jon)
-            modelTag.TagType = (byte) tag.TagType;
-            return modelTag;
-        }
-
-        private ViewModelRecipe ConvertToModel(Recipe r)
-        {
-            if (r == null) return null;
-            var recipe = new ViewModelRecipe();
-            recipe.RecipeId = r.RecipeId;
-            recipe.Instructions = r.Instructions;
-            recipe.CreatorUserId = r.CreatorUserId;
-            recipe.CreationTime = r.CreationTime;
-            recipe.Name = r.Name;
-            recipe.Tags = (from rt in r.RecipeTags select ConvertToModel(rt.Tag)).ToList();
-
-            return recipe;
         }
 
         /// <summary>
