@@ -8,6 +8,7 @@ using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
+using static TofuWarrior.BusinessLogic.Repositories.Mapper;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -18,34 +19,6 @@ namespace TofuWarrior.BusinessLogic.Repositories
         {
             _db = db;
         }
-
-        private ViewModelIngredient ConvertToModel(Ingredient ingredient)
-        {
-            if (ingredient == null) return null;
-
-            var model = new ViewModelIngredient()
-            {
-                Name = ingredient.Name,
-                IngredientId = ingredient.IngredientId,
-                Description = ingredient.Description
-            };
-            return model;
-        }
-
-        private ViewModelRecipe ConvertToModel(Recipe r)
-        {
-            if (r == null) return null;
-            var recipe = new ViewModelRecipe();
-            recipe.RecipeId = r.RecipeId;
-            recipe.Instructions = r.Instructions;
-            recipe.CreatorUserId = r.CreatorUserId;
-            recipe.CreationTime = r.CreationTime;
-            recipe.Name = r.Name;
-            recipe.Ingredients = (from ri in r.RecipeIngredients select ConvertToModel(ri.Ingredient)).ToList();
-
-            return recipe;
-        }
-
 
         public async Task<List<ViewModelIngredient>> GetAllIngredients()
         {
