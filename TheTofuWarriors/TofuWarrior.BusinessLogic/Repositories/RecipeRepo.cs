@@ -15,11 +15,11 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
     {
         private readonly TheTofuWarriorsDBContext _context;
-        private readonly ILogger<RecipeRepo> _logger;
-        public RecipeRepo(TheTofuWarriorsDBContext context, ILogger<RecipeRepo> logger)
+
+        public RecipeRepo(TheTofuWarriorsDBContext context)
         {
             _context = context;
-            _logger = logger;
+           
         }
 
 
