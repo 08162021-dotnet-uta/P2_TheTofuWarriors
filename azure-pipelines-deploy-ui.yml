@@ -1,0 +1,50 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+resources:
+  pipelines:
+  - pipeline: UIBuildPipeline
+    source: 'P2_TheTofuWarriors Build Angular UI'
+    trigger: true
+
+variables:
+  - group: Azure-angular-p2-deploy
+  - name: pathToStagePackage
+    value: "$(Build.ArtifactStagingDirectory)"
+  - name: pathToPackageFiles
+    value: "$(pathToStagePackage)/tofu-warriors-ui"
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: DownloadSecureFile@1
+  name: PubXML
+  displayName: 'Download .pubxml for Deployment'
+  inputs:
+    secureFile: 'Project1-StoreApplication-P2.pubxml'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    source: specific
+    project: 'revature-JonB'
+    pipeline: $(resources.pipeline.UIBuildPipeline.pipelineID)
+    artifact: AngularBuild
+    runVersion: latest
+    path: $(pathToStagePackage)
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: '$(angular_server_url)'
+    username: '$(angular_server_ftp_username)'
+    password: '$(angular_server_ftp_password)'
+    rootDirectory: '$(pathToPackageFiles)'
+    filePatterns: '**'
+    remoteDirectory: '/home/site/wwwroot'
+    clean: false
+    cleanContents: false
+    preservePaths: false
+    trustSSL: false
