@@ -29,3 +29,7 @@ steps:
   displayName: 'Show working files'
 - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
   displayName: 'Show staged files'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: "$(pathToAngularProject)/dist"
+    artifactName: AngularBuild
