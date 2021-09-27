@@ -45,15 +45,20 @@ steps:
 #    azure_static_web_apps_api_token: $(angular_deploy_token)
 
 
+#- task: AzureStaticWebApp@0
+#  inputs:
+#    app_location: "$(pathToAngularProject)"
+#    api_location: "api"
+#    output_location: "wwwroot"
+#  env:
+#    azure_static_web_apps_api_token: $(angular_deploy_token)
+
 - task: AzureStaticWebApp@0
   inputs:
-    app_location: "$(pathToAngularProject)"
-    api_location: "api"
-    output_location: "wwwroot"
-  env:
-    azure_static_web_apps_api_token: $(angular_deploy_token)
-
-
+    app_location: '$(pathToAngularProject)'
+    output_location: '$(pathToPackageFiles)'
+    skip_app_build: true
+    azure_static_web_apps_api_token: '$(angular_deploy_token)'
 
 #- task: FtpUpload@2
 #  inputs:
