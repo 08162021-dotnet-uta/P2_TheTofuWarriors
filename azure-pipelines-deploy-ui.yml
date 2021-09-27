@@ -35,16 +35,23 @@ steps:
     runVersion: latest
     path: $(pathToStagePackage)
 
-- task: FtpUpload@2
+- task: AzureStaticWebApp@0
   inputs:
-    credentialsOption: 'inputs'
-    serverUrl: '$(angular_server_url)'
-    username: '$(angular_server_ftp_username)'
-    password: '$(angular_server_ftp_password)'
-    rootDirectory: '$(pathToPackageFiles)'
-    filePatterns: '**'
-    remoteDirectory: '/site/wwwroot'
-    clean: false
-    cleanContents: true
-    preservePaths: false
-    trustSSL: false
+    app_location: '$(pathToPackageFiles)'
+    api_location: 'api'
+    output_location: '/'
+    azure_static_web_apps_api_token: $(angular_deploy_token)
+
+#- task: FtpUpload@2
+#  inputs:
+#    credentialsOption: 'inputs'
+#    serverUrl: '$(angular_server_url)'
+#    username: '$(angular_server_ftp_username)'
+#    password: '$(angular_server_ftp_password)'
+#    rootDirectory: '$(pathToPackageFiles)'
+#    filePatterns: '**'
+#    remoteDirectory: '/site/wwwroot'
+#    clean: false
+#    cleanContents: true
+#    preservePaths: false
+#    trustSSL: false
