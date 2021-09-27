@@ -43,8 +43,8 @@ steps:
     password: '$(angular_server_ftp_password)'
     rootDirectory: '$(pathToPackageFiles)'
     filePatterns: '**'
-    remoteDirectory: 'site/wwwroot'
+    remoteDirectory: '/site/wwwroot'
     clean: false
-    cleanContents: false
+    cleanContents: true
     preservePaths: false
     trustSSL: false
