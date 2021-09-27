@@ -19,14 +19,14 @@ variables:
     value: "tofu-warriors-ui"
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 steps:
-- task: DownloadSecureFile@1
-  name: PubXML
-  displayName: 'Download .pubxml for Deployment'
-  inputs:
-    secureFile: 'Project1-StoreApplication-P2.pubxml'
+#- task: DownloadSecureFile@1
+#  name: PubXML
+#  displayName: 'Download .pubxml for Deployment'
+#  inputs:
+#    secureFile: 'Project1-StoreApplication-P2.pubxml'
 
 - task: DownloadPipelineArtifact@2
   inputs:
