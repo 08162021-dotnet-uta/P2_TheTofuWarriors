@@ -25,11 +25,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-#- task: DownloadSecureFile@1
-#  name: PubXML
-#  displayName: 'Download .pubxml for Deployment'
-#  inputs:
-#    secureFile: 'Project1-StoreApplication-P2.pubxml'
 
 - task: DownloadPipelineArtifact@2
   inputs:
@@ -40,22 +35,6 @@ steps:
     runVersion: latest
     path: "$(pathToAngularProject)/dist"
 
-#- task: AzureStaticWebApp@0
-#  inputs:
-#    app_location: '$(pathToAngularProject)'
-#    api_location: 'api'
-#    output_location: 'dist/tofu-warriors-ui'
-#    azure_static_web_apps_api_token: $(angular_deploy_token)
-
-
-#- task: AzureStaticWebApp@0
-#  inputs:
-#    app_location: "$(pathToAngularProject)"
-#    api_location: "api"
-#    output_location: "wwwroot"
-#  env:
-#    azure_static_web_apps_api_token: $(angular_deploy_token)
-
 - script: 'ls -R ./'
   displayName: 'Show working files'
 - task: AzureStaticWebApp@0
@@ -64,17 +43,3 @@ steps:
     output_location: 'wwwroot'
     skip_app_build: true
     azure_static_web_apps_api_token: '$(angular_deploy_token)'
-
-#- task: FtpUpload@2
-#  inputs:
-#    credentialsOption: 'inputs'
-#    serverUrl: '$(angular_server_url)'
-#    username: '$(angular_server_ftp_username)'
-#    password: '$(angular_server_ftp_password)'
-#    rootDirectory: '$(pathToPackageFiles)'
-#    filePatterns: '**'
-#    remoteDirectory: '/site/wwwroot'
-#    clean: false
-#    cleanContents: true
-#    preservePaths: false
-#    trustSSL: false
