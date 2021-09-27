@@ -43,6 +43,8 @@ stages:
       displayName: 'Show working files'
     - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
       displayName: 'Show staged files'
+    - script: 'echo "$(System.DefinitionId)"'
+      displayName: 'Show pipeline ID'
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: $(Build.ArtifactStagingDirectory)
