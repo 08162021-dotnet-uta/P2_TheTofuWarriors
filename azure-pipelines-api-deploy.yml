@@ -23,7 +23,7 @@ steps:
   name: PubXML
   displayName: 'Download .pubxml for Deployment'
   inputs:
-    secureFile: 'Project1-StoreApplication-P2.pubxml'
+    secureFile: 'project2-tofu-warriors-api-deploy.pubxml'
 
 - task: DownloadPipelineArtifact@2
   inputs:
