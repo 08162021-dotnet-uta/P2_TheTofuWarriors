@@ -7,7 +7,10 @@ resources:
   pipelines:
   - pipeline: APIBuildPipeline
     source: 'P2_TheTofuWarriors Build .NET API'
-    trigger: true
+    trigger:
+      branches:
+        include:
+          - main
 
 variables:
   pathToStagePackage: "$(Build.ArtifactStagingDirectory)"
