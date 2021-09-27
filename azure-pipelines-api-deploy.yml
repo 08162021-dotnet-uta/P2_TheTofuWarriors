@@ -6,7 +6,7 @@
 resources:
   pipelines:
   - pipeline: APIBuildPipeline
-    source: 'P2_TheTofuWarriors API Build'
+    source: 'P2_TheTofuWarriors Build .NET API'
     trigger: true
 
 variables:
