@@ -13,7 +13,7 @@ variables:
   pathToStagePackage: "$(Build.ArtifactStagingDirectory)"
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
 - task: DownloadSecureFile@1
