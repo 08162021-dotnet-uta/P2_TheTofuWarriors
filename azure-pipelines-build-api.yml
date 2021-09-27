@@ -33,12 +33,12 @@ stages:
       name: PubXML
       displayName: 'Download .pubxml for Deployment'
       inputs:
-        secureFile: 'Project1-StoreApplication-P2.pubxml'
+        secureFile: 'project2-tofu-warriors-api-deploy.pubxml'
     - task: VSBuild@1
       inputs:
         solution: '$(pathToAPISln)'
         #msbuildArgs: '/t:Restore /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(p1Package)"'
-        msbuildArgs: '/t:Restore;Build /p:DeployIisAppPath="Project1-StoreApplication" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PublishProfile="$(PubXML.secureFilePath)" /p:PackageLocation="$(p2PackagePath)"'
+        msbuildArgs: '/t:Restore;Build /p:DeployIisAppPath="project2-tofu-warriors-api" /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PublishProfile="$(PubXML.secureFilePath)" /p:PackageLocation="$(p2PackagePath)"'
     - script: 'ls -R "$(System.DefaultWorkingDirectory)"'
       displayName: 'Show working files'
     - script: 'ls -R "$(Build.ArtifactStagingDirectory)"'
