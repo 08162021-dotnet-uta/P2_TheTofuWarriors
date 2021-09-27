@@ -57,8 +57,8 @@ steps:
   displayName: 'Show working files'
 - task: AzureStaticWebApp@0
   inputs:
-    app_location: '$(pathToAngularProject)'
-    output_location: '$(pathToAngularProject)/dist/tofu-warriors-ui'
+    app_location: '$(pathToAngularProject)/dist/tofu-warriors-ui'
+    output_location: 'wwwroot'
     skip_app_build: true
     azure_static_web_apps_api_token: '$(angular_deploy_token)'
 
