@@ -53,6 +53,8 @@ steps:
 #  env:
 #    azure_static_web_apps_api_token: $(angular_deploy_token)
 
+- script: 'ls -R ./'
+  displayName: 'Show working files'
 - task: AzureStaticWebApp@0
   inputs:
     app_location: '$(pathToAngularProject)'
