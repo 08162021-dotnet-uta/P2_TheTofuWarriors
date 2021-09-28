@@ -41,7 +41,11 @@ namespace TofuWarrior
 			{
 				options.AddPolicy("Dev", builder =>
 				{
-					builder.WithOrigins("http://localhost:4200")
+					//var allowedOrigins = Configuration.GetValue<List<string>>("CORSHosts");
+					var allowedOrigins = Configuration.GetSection("CORSHosts").Get<string[]>();
+					//Console.WriteLine($"Allowed Origins: '{allowedOrigins}'");
+					//Console.WriteLine($"{allowedOrigins.Length}");
+					builder.WithOrigins(allowedOrigins)
 					.AllowAnyHeader()
 					.AllowAnyMethod();
 				});
