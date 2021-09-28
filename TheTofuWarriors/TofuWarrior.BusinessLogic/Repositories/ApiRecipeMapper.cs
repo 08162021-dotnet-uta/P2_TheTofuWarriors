@@ -15,18 +15,34 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
 		public static ViewModelRecipeIngredient ConvertToModel(ApiModel.Ingredient ingredient)
 		{
-			int q = 0;
-			int.TryParse(ingredient.quantity, out q);
+			float q;
+			float.TryParse(ingredient.quantity, out q);
 			return new ViewModelRecipeIngredient()
 			{
 				IngredientId = 0,
 				RecipeIngredientId = 0,
-				Quantity = q,
+				Quantity = (int) q,
 				IngredientName = ingredient.food,
 				IngredientDescription = ingredient.text,
 				MeasureUnitId = 0,
 				MeasureUnit = ingredient.measure,
 				MeasureDescription = ingredient.measure
+			};
+		}
+		public static ViewModelRecipe ConvertToModel(ApiModel.Recipe apiModel)
+		{
+			if (apiModel == null)
+				return null;
+
+			return new ViewModelRecipe
+			{
+				Instructions = string.Join("\n", apiModel.ingredientLines),
+				IsExternal = true,
+				ApiKey = apiModel.uri,
+				Name = apiModel.label,
+				ImageUrl = apiModel.image,
+				Ingredients = apiModel.ingredients.Select(ConvertToModel).ToList(),
+				Tags = ParseTags(apiModel)
 			};
 		}
 
@@ -90,22 +106,6 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			return tags;
 		}
 
-		public static ViewModelRecipe ConvertToModel(ApiModel.Recipe apiModel)
-		{
-			if (apiModel == null)
-				return null;
-
-			return new ViewModelRecipe
-			{
-				Instructions = string.Join("\n", apiModel.ingredientLines),
-				IsExternal = true,
-				ApiKey = apiModel.uri,
-				Name = apiModel.label,
-				ImageUrl = apiModel.image,
-				Ingredients = apiModel.ingredients.Select(ConvertToModel).ToList(),
-				Tags = ParseTags(apiModel)
-			};
-}
 
 	}
 }
