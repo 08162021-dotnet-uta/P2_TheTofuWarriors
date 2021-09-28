@@ -12,6 +12,8 @@ resources:
         include:
           - main
 
+pr: none
+
 variables:
   pathToStagePackage: "$(Build.ArtifactStagingDirectory)"
 
