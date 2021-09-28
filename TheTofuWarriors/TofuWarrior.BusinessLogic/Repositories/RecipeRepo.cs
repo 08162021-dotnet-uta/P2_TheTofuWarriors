@@ -19,14 +19,13 @@ namespace TofuWarrior.BusinessLogic.Repositories
         private readonly TheTofuWarriorsDBContext _context;
         private readonly ILogger<RecipeRepo> _logger;
         private readonly RecipeApi.EdamamRecipeApi _adamamRecipeApi;
-        public RecipeRepo(TheTofuWarriorsDBContext context, ILogger<RecipeRepo> logger, IHttpClientFactory httpClientFactory)
+        public RecipeRepo(TheTofuWarriorsDBContext context, ILogger<RecipeRepo> logger, RecipeApi.EdamamRecipeApi recipeApi)
         {
             _context = context;
             _logger = logger;
-            _adamamRecipeApi = new RecipeApi.EdamamRecipeApi(httpClientFactory);
+			//_adamamRecipeApi = new RecipeApi.EdamamRecipeApi(httpClientFactory);
+			_adamamRecipeApi = recipeApi;
         }
-
-		public object AdamamRecipeApi { get; private set; }
 
 		public async Task<Recipe> CreateItemAsync(ViewModelRecipe item)
         {

@@ -6,23 +6,65 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Specialized;
+using System.Web;
+using Microsoft.Extensions.Logging;
 
 namespace TofuWarrior.BusinessLogic.Api
 {
     public class EdamamRecipeApi
     {
         private readonly IHttpClientFactory _clientFactory;
-        public EdamamRecipeApi(IHttpClientFactory clientFactory)
+		private readonly IConfiguration _config;
+		private ILogger<EdamamRecipeApi> _logger;
+        public EdamamRecipeApi(IConfiguration config, IHttpClientFactory clientFactory, ILogger<EdamamRecipeApi> logger)
         {
             _clientFactory = clientFactory;
+			_config = config;
+			_logger = logger;
         }
         public async Task<EdamamRecipeModel> SearchRecipeAsync(string keyword)
         {
-            string url = $"https://edamam-recipe-search.p.rapidapi.com/search?q={keyword}";
+			//string url = $"https://edamam-recipe-search.p.rapidapi.com/search?q={keyword}";
+			string baseUrl = _config["EdamamAPIEndpoint"];
+			string appId = _config["EdamamAppId"];
+			string apiKey = _config["EdamamAPIKey"];
 
+			_logger.LogDebug("Url: {0}", baseUrl);
+			_logger.LogDebug("app id: {0}", appId);
+			_logger.LogDebug("api key: {0}", apiKey);
+
+			var uri = new UriBuilder(baseUrl);
+			var queryParams = HttpUtility.ParseQueryString("");
+			queryParams["type"] = "public";
+			queryParams["app_id"] = appId;
+			queryParams["app_key"] = apiKey;
+			queryParams["q"] = keyword;
+			_logger.LogDebug("Query params: {0}", queryParams.ToString());
+			uri.Query = queryParams.ToString();
+			var url = uri.ToString();
+
+			try
+			{
+				var useCachedResult = bool.Parse(_config["EdamamUseFakeRequest"]);
+				_logger.LogInformation("useCachedResult: {0}", useCachedResult);
+				if (useCachedResult)
+				{
+					var cachedJsonStr = File.ReadAllText("./cachedResponse.json");
+					return JsonConvert.DeserializeObject<EdamamRecipeModel>(cachedJsonStr);
+				}
+
+			} catch (Exception e)
+			{
+				// configuration not set, or failed to use cached result. continue on as normal.
+				_logger.LogError("Encountered error using cached API result {0}", e);
+			}
+
+			_logger.LogInformation("sending edamam api request: {0}", url.ToString());
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("x-rapidapi-host", "edamam-recipe-search.p.rapidapi.com");
-            request.Headers.Add("x-rapidapi-key", "5d31783a98msh437c1f02f7cf668p10a870jsn85d41044eaa6");
+            //request.Headers.Add("x-rapidapi-host", "edamam-recipe-search.p.rapidapi.com");
+            //request.Headers.Add("x-rapidapi-key", "5d31783a98msh437c1f02f7cf668p10a870jsn85d41044eaa6");
 
             var client = _clientFactory.CreateClient();
             var response = client.Send(request);
@@ -30,9 +72,14 @@ namespace TofuWarrior.BusinessLogic.Api
             if (response.IsSuccessStatusCode)
             {
                 string resJsonStr = await response.Content.ReadAsStringAsync();
-                Trace.WriteLine(resJsonStr);
+				//Trace.WriteLine(resJsonStr);
+				_logger.LogDebug(resJsonStr);
+				//File.WriteAllText("./cachedResponse.json", resJsonStr);
                 return JsonConvert.DeserializeObject<EdamamRecipeModel>(resJsonStr);
-            }
+            } else
+			{
+				_logger.LogError(response.ToString());
+			}
             return null;
         }
     }

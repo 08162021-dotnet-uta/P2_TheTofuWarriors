@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TofuWarrior.BusinessLogic.Api;
 using TofuWarrior.BusinessLogic.Interfaces;
 using TofuWarrior.BusinessLogic.Repositories;
 using TofuWarrior.Storage;
@@ -72,6 +73,7 @@ namespace TofuWarrior
 			services.AddScoped<ITagRepository, TagRepository>();
 			services.AddScoped<IIngredientRepository, IngredientRepository>();
 			services.AddScoped<IMeasurementRepository, MeasurementRepository>();
+			services.AddScoped<EdamamRecipeApi>();
 			services.AddHttpClient();
 		}
 

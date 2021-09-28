@@ -47,7 +47,10 @@ namespace TofuWarrior.BusinessLogic.Api
         public float yield { get; set; }
         public string[] dietLabels { get; set; }
         public string[] healthLabels { get; set; }
-        public object[] cautions { get; set; }
+        public string[] cautions { get; set; }
+		public string[] cuisineType { get; set; }
+		public string[] mealType { get; set; }
+		public string[] dishType { get; set; }
         public string[] ingredientLines { get; set; }
         public Ingredient[] ingredients { get; set; }
         public float calories { get; set; }
@@ -509,6 +512,9 @@ namespace TofuWarrior.BusinessLogic.Api
     {
         public string text { get; set; }
         public float weight { get; set; }
+		public string food { get; set; }
+		public string quantity { get; set; }
+		public string measure { get; set; }
     }
 
     public class Digest
