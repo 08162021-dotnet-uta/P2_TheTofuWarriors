@@ -31,7 +31,8 @@ steps:
     project: 'revature-JonB'
     pipeline: $(resources.pipeline.APIBuildPipeline.pipelineID)
     artifact: ApiBuild
-    runVersion: latest
+    runVersion: 'specific'
+    runId: $(resources.pipeline.APIBuildPipeline.runID)
     path: $(pathToStagePackage)
 
 - task: AzureRmWebAppDeployment@4
