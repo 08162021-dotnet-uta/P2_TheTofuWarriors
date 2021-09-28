@@ -1,0 +1,13 @@
+
+
+<div *ngIf="recipe">
+  <h4>{{recipe.name}}</h4>
+  <!-- TODO: get user info from recipe object? -->
+  <p>Created by: </p>
+  <p>Ingredients:</p>
+  <ul>
+    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
+  </ul>
+  <p>Instructions:</p>
+  <p>{{recipe.instructions}}</p>
+</div>

@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule,FormControl,FormGroup } from '@angular/forms';
+import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
+import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormsModule,FormControl,FormGroup } from '@angular/forms';
     SignupComponent,
     
     UserHomePageComponent,
-    RecipeSearchPageComponent
+    RecipeSearchPageComponent,
+    UserProfilePageComponent,
+    RecipeDisplayComponent
   ],
   imports: [
     BrowserModule,

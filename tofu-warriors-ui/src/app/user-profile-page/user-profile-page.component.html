@@ -1,0 +1,12 @@
+
+<div *ngIf="user">
+  <h3>Profile for {{user.firstName}} {{user.lastName}}</h3>
+  <div>
+    <h4>Recipes created by {{user.firstName}}</h4>
+    <div>
+      <div *ngFor="let recipe of recipes">
+        <app-recipe-display [recipe]="recipe"></app-recipe-display>
+      </div>
+    </div>
+  </div>
+</div>

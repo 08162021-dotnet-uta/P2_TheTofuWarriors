@@ -50,4 +50,8 @@ export class UsersService {
   getCurrentUser(): User | null {
     return this.currentUser;
   }
+
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/User/${userId}`);
+  }
 }
