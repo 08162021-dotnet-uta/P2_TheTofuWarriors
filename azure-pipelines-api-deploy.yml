@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+resources:
+  pipelines:
+  - pipeline: APIBuildPipeline
+    source: 'P2_TheTofuWarriors Build .NET API'
+    trigger:
+      branches:
+        include:
+          - main
+
+pr: none
+
+variables:
+  pathToStagePackage: "$(Build.ArtifactStagingDirectory)"
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: DownloadSecureFile@1
+  name: PubXML
+  displayName: 'Download .pubxml for Deployment'
+  inputs:
+    secureFile: 'project2-tofu-warriors-api-deploy.pubxml'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    source: specific
+    project: 'revature-JonB'
+    pipeline: $(resources.pipeline.APIBuildPipeline.pipelineID)
+    artifact: ApiBuild
+    runVersion: 'specific'
+    runId: $(resources.pipeline.APIBuildPipeline.runID)
+    path: $(pathToStagePackage)
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'PublishProfile'
+    #PublishProfilePath: '$(System.DefaultWorkingDirectory)/**/*.pubxml'
+    PublishProfilePath: '$(PubXML.secureFilePath)'
+    PublishProfilePassword: $(PublishPWD)
+    packageForLinux: '$(pathToStagePackage)/**/*.zip'
