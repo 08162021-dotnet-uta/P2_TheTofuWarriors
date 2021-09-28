@@ -32,7 +32,8 @@ steps:
     project: 'revature-JonB'
     pipeline: $(resources.pipeline.UIBuildPipeline.pipelineID)
     artifact: AngularBuild
-    runVersion: latest
+    runVersion: 'specific'
+    runId: $(resources.pipeline.UIBuildPipeline.runID)
     path: "$(pathToAngularProject)/dist"
 
 - script: 'ls -R ./'
