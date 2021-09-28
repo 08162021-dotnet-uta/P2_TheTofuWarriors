@@ -7,7 +7,12 @@ variables:
   pathToAngularProject: 'tofu-warriors-ui'
 
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - tofu-warriors-ui
 
 pool:
   vmImage: ubuntu-latest
