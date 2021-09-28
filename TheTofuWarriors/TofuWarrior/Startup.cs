@@ -43,8 +43,8 @@ namespace TofuWarrior
 				{
 					//var allowedOrigins = Configuration.GetValue<List<string>>("CORSHosts");
 					var allowedOrigins = Configuration.GetSection("CORSHosts").Get<string[]>();
-					//Console.WriteLine($"Allowed Origins: '{allowedOrigins}'");
-					//Console.WriteLine($"{allowedOrigins.Length}");
+					Console.WriteLine($"Allowed Origins: '{allowedOrigins}'");
+					Console.WriteLine($"{allowedOrigins.Length}");
 					builder.WithOrigins(allowedOrigins)
 					.AllowAnyHeader()
 					.AllowAnyMethod();
