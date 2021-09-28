@@ -6,7 +6,7 @@
   <p>Created by: </p>
   <p>Ingredients:</p>
   <ul>
-    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
+    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.measureDescription}} {{ingredient.ingredientName}}</li>
   </ul>
   <p>Instructions:</p>
   <p>{{recipe.instructions}}</p>

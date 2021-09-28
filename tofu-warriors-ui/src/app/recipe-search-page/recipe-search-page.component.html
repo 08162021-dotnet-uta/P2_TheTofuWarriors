@@ -10,13 +10,15 @@
     <!-- input to get search term -->
     <div>
       <label for="recipe-search-value-input">Enter term to search for</label>
-      <input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>
+      <!--<input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>-->
+      <input id="recipe-search-value-input" name="recipe-search-value" [(ngModel)]="curTerm.value" placeholder="Enter search term"/>
     </div>
 
     <!-- selector to get type of term (search based on recipe name/tag/etc) -->
     <div>
       <label for="recipe-search-type-selector">Choose search type</label>
-      <select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">
+      <!--<select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">-->
+      <select id="recipe-search-type-selector" name="recipe-search-type" [(ngModel)]="curTerm.type">
         <option value="name_search">Name</option>
         <option value="tag_search">Tag</option>
         <option value="ingredient_search">Ingredient</option>
@@ -32,6 +34,18 @@
           <span class="recipe-search-term">{{term.value}} {{term.type}}</span> <button (click)="removeSearchTerm(term)"> Remove </button>
         </li>
       </ul>
+    </div>
+    <br />
+    <button (click)="runSearch()">Search</button>
+    <button *ngIf="results.length" (click)="clearResults()">Clear</button>
+  </div>
+
+  <div *ngIf="results.length">
+    <h4>Results:</h4>
+    <div class="recipe-search-results">
+      <div *ngFor="let recipe of results">
+        <app-recipe-display [recipe]="recipe"></app-recipe-display>
+      </div>
     </div>
   </div>
 </div>

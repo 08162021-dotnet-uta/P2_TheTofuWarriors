@@ -19,4 +19,8 @@ export class RecipeService {
   getRecipesCreatedBy(userId: number): Observable<Recipe[]> {
     return this.httpClient.get<Recipe[]>(`${this.apiUrl}/User/${userId}/recipes`);
   }
+
+  searchRecipesByName(name: string): Observable<Recipe[]> {
+    return this.httpClient.get<Recipe[]>(`${this.apiUrl}/Recipe/SearchByIngredientName/${name}`);
+  }
 }
