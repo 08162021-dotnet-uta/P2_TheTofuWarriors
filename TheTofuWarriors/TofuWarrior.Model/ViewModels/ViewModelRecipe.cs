@@ -10,6 +10,8 @@ namespace TheTofuWarrior.Model.ViewModels
     public string Name { get; set; }
     public string Instructions { get; set; }
     public DateTime? CreationTime { get; set; }
+    public bool IsExternal { get; set; }
+    public string ImageUrl { get; set; }
 
 
     public List<ViewModelTag> Tags { get; set; }

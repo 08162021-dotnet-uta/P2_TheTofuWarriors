@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.Storage;
 using TofuWarrior.BusinessLogic.Interfaces;
+using System.Net.Http;
+using RecipeApi = TofuWarrior.BusinessLogic.Api;
 
 namespace TofuWarrior.BusinessLogic.Repositories
 {
@@ -16,14 +18,17 @@ namespace TofuWarrior.BusinessLogic.Repositories
     {
         private readonly TheTofuWarriorsDBContext _context;
         private readonly ILogger<RecipeRepo> _logger;
-        public RecipeRepo(TheTofuWarriorsDBContext context, ILogger<RecipeRepo> logger)
+        private readonly RecipeApi.EdamamRecipeApi _adamamRecipeApi;
+        public RecipeRepo(TheTofuWarriorsDBContext context, ILogger<RecipeRepo> logger, IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _logger = logger;
+            _adamamRecipeApi = new RecipeApi.EdamamRecipeApi(httpClientFactory);
         }
 
+		public object AdamamRecipeApi { get; private set; }
 
-        public async Task<Recipe> CreateItemAsync(ViewModelRecipe item)
+		public async Task<Recipe> CreateItemAsync(ViewModelRecipe item)
         {
             Recipe r = Mapper.ViewModelRecipeToRecipe(item);
             _context.Recipes.Add(r);
@@ -58,6 +63,12 @@ namespace TofuWarrior.BusinessLogic.Repositories
             return views;
         }
 
+        public async Task<List<ViewModelRecipe>> SearchByIngredientName(string ingredientName)
+        {
+            var result = await _adamamRecipeApi.SearchRecipeAsync(ingredientName);
+            return result.hits.Select(h=> ApiRecipeMapper.ConvertToModel(h.recipe))
+                .ToList();
+        }
       
     }
 }

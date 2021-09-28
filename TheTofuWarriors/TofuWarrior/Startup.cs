@@ -65,6 +65,7 @@ namespace TofuWarrior
 			services.AddScoped<ITagRepository, TagRepository>();
 			services.AddScoped<IIngredientRepository, IngredientRepository>();
 			services.AddScoped<IMeasurementRepository, MeasurementRepository>();
+			services.AddHttpClient();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

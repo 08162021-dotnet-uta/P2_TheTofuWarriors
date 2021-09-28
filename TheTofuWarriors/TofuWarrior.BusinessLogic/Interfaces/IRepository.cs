@@ -14,6 +14,6 @@ namespace TofuWarrior.BusinessLogic.Interfaces
         Task<ViewModelRecipe> GetItemsByIdAsync(int id);
         Task<Recipe> DeleteItemAsync(ViewModelRecipe item);
         Task<Recipe> CreateItemAsync(ViewModelRecipe item);
-
+        Task<List<ViewModelRecipe>> SearchByIngredientName(string ingredientName);
     }
 }
