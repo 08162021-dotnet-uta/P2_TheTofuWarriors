@@ -11,7 +11,7 @@ using Xunit;
 
 namespace TofuWarrior.Tests.RepositoryTests.MeasureRepoTests
 {
-	[Collection("Recip Repository Tests")]
+	[Collection("Repository Tests")]
 	public class RecipeRepoTest
 	{
         public static IEnumerable<object[]> GetData()
@@ -46,7 +46,8 @@ namespace TofuWarrior.Tests.RepositoryTests.MeasureRepoTests
 				mockDbContext.Recipes.Add(recipe);
 				mockDbContext.SaveChanges();
 
-				var recipe_repotest = new RecipeRepo(mockDbContext); 
+				// TODO: set up a null logger and a mocked htttpClient
+				var recipe_repotest = new RecipeRepo(mockDbContext, null, null); 
 				var recipes = await recipe_repotest.GetAllItemAsync();
 
 				Assert.NotEmpty(recipes);

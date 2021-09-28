@@ -8,7 +8,7 @@ using Xunit;
 
 namespace TofuWarrior.Tests.RepositoryTests.UserRepoTests
 {
-	[Collection("Measure Repository Tests")]
+	[Collection("Repository Tests")]
 	public class UserTest
 	{
 		[Fact]
