@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+resources:
+  pipelines:
+  - pipeline: UIBuildPipeline
+    source: 'P2_TheTofuWarriors Build Angular UI'
+    trigger:
+      branches:
+        include:
+          - main
+
+pr: none
+trigger: none
+
+variables:
+  - group: Azure-angular-p2-deploy
+  - name: pathToStagePackage
+    value: "$(Build.ArtifactStagingDirectory)"
+  - name: pathToPackageFiles
+    value: "$(pathToStagePackage)/tofu-warriors-ui"
+  - name: pathToAngularProject
+    value: "tofu-warriors-ui"
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    source: specific
+    project: 'revature-JonB'
+    pipeline: $(resources.pipeline.UIBuildPipeline.pipelineID)
+    artifact: AngularBuild
+    runVersion: 'specific'
+    runId: $(resources.pipeline.UIBuildPipeline.runID)
+    path: "$(pathToAngularProject)/dist"
+
+- script: 'ls -R ./'
+  displayName: 'Show working files'
+- task: AzureStaticWebApp@0
+  inputs:
+    app_location: '$(pathToAngularProject)/dist/tofu-warriors-ui'
+    output_location: 'wwwroot'
+    skip_app_build: true
+    azure_static_web_apps_api_token: '$(angular_deploy_token)'

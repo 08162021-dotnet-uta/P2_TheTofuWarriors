@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
@@ -12,7 +13,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   private currentUser: User | null = null;
-  private apiUrl = 'https://localhost:44350';
+  private apiUrl = environment.tofuWarriorsApiUrl;
   httpOptions={
     headers: new HttpHeaders({
       "Content-Type":'application/json'
@@ -48,5 +49,9 @@ export class UsersService {
 
   getCurrentUser(): User | null {
     return this.currentUser;
+  }
+
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/User/${userId}`);
   }
 }
