@@ -62,9 +62,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
             return views;
         }
 
-        public async Task<List<ViewModelRecipe>> SearchByIngredientName(string ingredientName)
+        public async Task<List<ViewModelRecipe>> SearchRecipes(List<string> ingredientNames, List<ViewModelTag> tags)
         {
-            var result = await _adamamRecipeApi.SearchRecipeAsync(ingredientName);
+            var result = await _adamamRecipeApi.SearchRecipeAsync(ingredientNames, tags);
             return result.hits.Select(h=> ApiRecipeMapper.ConvertToModel(h.recipe))
                 .ToList();
         }

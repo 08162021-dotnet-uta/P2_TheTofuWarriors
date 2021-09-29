@@ -106,6 +106,5 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			return tags;
 		}
 
-
 	}
 }

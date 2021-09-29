@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Specialized;
 using System.Web;
 using Microsoft.Extensions.Logging;
+using TheTofuWarrior.Model.ViewModels;
 
 namespace TofuWarrior.BusinessLogic.Api
 {
@@ -24,7 +25,7 @@ namespace TofuWarrior.BusinessLogic.Api
 			_config = config;
 			_logger = logger;
         }
-        public async Task<EdamamRecipeModel> SearchRecipeAsync(string keyword)
+        public async Task<EdamamRecipeModel> SearchRecipeAsync(List<string> keywords, List<ViewModelTag> tags)
         {
 			//string url = $"https://edamam-recipe-search.p.rapidapi.com/search?q={keyword}";
 			string baseUrl = _config["EdamamAPIEndpoint"];
@@ -40,9 +41,12 @@ namespace TofuWarrior.BusinessLogic.Api
 			queryParams["type"] = "public";
 			queryParams["app_id"] = appId;
 			queryParams["app_key"] = apiKey;
-			queryParams["q"] = keyword;
-			_logger.LogDebug("Query params: {0}", queryParams.ToString());
-			uri.Query = queryParams.ToString();
+			queryParams["q"] = string.Join<string>(",", keywords);
+
+			var additionalParams = BuildQueryParamsFromTags(tags);
+			var allParams = queryParams.ToString() + additionalParams;
+			_logger.LogDebug("Query params: {0}", allParams);
+			uri.Query = allParams;
 			var url = uri.ToString();
 
 			try
@@ -82,6 +86,41 @@ namespace TofuWarrior.BusinessLogic.Api
 			}
             return null;
         }
+
+		public static string BuildQueryParamsFromTags(List<ViewModelTag> tags)
+		{
+			Dictionary<int, List<string>> newParams = new();
+			var validTagTypes = ApiTagTypes.GetValidTypeIds();
+			foreach (var typeId in validTagTypes)
+			{
+				newParams[typeId] = new List<string>();
+			}
+
+			foreach (var tag in tags)
+			{
+				if (tag.TagType == null || !validTagTypes.Contains((int) tag.TagType))
+				{
+					throw new ArgumentException($"Invalid tag type given in search params: '{tag.TagType}'");
+				}
+				int typeId = (int)tag.TagType;
+				if (!ApiTagTypes.IsValidLabel(typeId, tag.Name))
+				{
+					throw new ArgumentException($"Invalid tag type value '{tag.Name}' given in search params for type '{typeId}'");
+				}
+				newParams[typeId].Add(tag.Name);
+			}
+			var result = "";
+			foreach (var (typeId, vals) in newParams)
+			{
+				if (vals.Count == 0) { continue; }
+				var label = ApiTagTypes.GetQueryParamForType(typeId);
+				foreach (var val in vals)
+				{
+					result += $"&{label}={val}";
+				}
+			}
+			return result;
+		}
     }
 
    
