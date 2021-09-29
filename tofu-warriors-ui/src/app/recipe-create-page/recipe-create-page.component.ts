@@ -57,4 +57,8 @@ export class RecipeCreatePageComponent implements OnInit {
     this.recipe = { ...this.recipe, ...valuesToCopy };
     console.log("cloned recipe: ", this.recipe);
   }
+
+  saveRecipe(): void {
+    console.log("Saving", this.recipe);
+  }
 }

@@ -1,0 +1,20 @@
+
+<div class="ingredient-picker">
+  <div>
+    <label for="ingredient_picker">Ingredient </label>
+    <select id="ingredient_picker" name="ingredientId" [(ngModel)]="data.ingredientId">
+      <option *ngFor="let ingredient of ingredients" [value]="ingredient.ingredientId">{{ingredient.name}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="ingredient_quantity">Quantity </label>
+    <input name="quantity" id="ingredient_quantity" type="number" [(ngModel)]="data.quantity"/>
+  </div>
+  <div>
+    <label for="ingredient_measure">Measurement unit</label>
+    <select id="ingredient_measure" name="measureId" [(ngModel)]="data.measureId">
+      <option *ngFor="let measure of measures" [value]="measure.measureUnitId">{{measure.description}}</option>
+    </select>
+  </div>
+  <button (click)="addIngredient()">Add ingredient</button>
+</div>

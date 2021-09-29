@@ -21,6 +21,7 @@ import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.com
 import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
 import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     RecipeEditPageComponent,
     RecipeCreatePageComponent,
     RecipeBasePageComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    IngredientPickerComponent
   ],
   imports: [
     BrowserModule,
