@@ -4,7 +4,14 @@
   <div *ngIf="this.currentUser">
     <h2>Welcome, {{this.currentUser.firstName}} {{this.currentUser.lastName}}!</h2>
     <button routerLink="/recipeSearch">Search Recipes</button>
+    <br>
+    <br>
+     <div class="ohter-users">
+    <h1>Other Tofu Warriors</h1>
+    <app-user-display></app-user-display>
   </div>
+  </div>
+
   <div *ngIf="!this.currentUser">
     <h2>Please Log In</h2>
   </div>

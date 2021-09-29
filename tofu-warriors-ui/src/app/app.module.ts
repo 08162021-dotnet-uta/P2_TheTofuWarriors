@@ -16,6 +16,7 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
+import { FollowersPageComponent } from './followers-page/followers-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recip
     UserProfilePageComponent,
     RecipeDisplayComponent,
     RecipesListComponent,
-    RecipeSearchTagPickerComponent
+    RecipeSearchTagPickerComponent,
+    FollowersPageComponent
   ],
   imports: [
     BrowserModule,

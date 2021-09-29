@@ -19,7 +19,7 @@ export class UsersService {
       "Content-Type":'application/json'
     })
   };
-
+//get all users
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/User/userlist`);
   }
