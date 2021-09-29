@@ -20,7 +20,8 @@ VALUES ('tsp', 'Teaspoon')
 	,('oz', 'Ounce')
 	,('fl oz', 'Fluid Ounce')
 	,('lb', 'Pound')
-	,('kg', 'Kilogram');
+	,('kg', 'Kilogram')
+	,('cup', 'One Cup');
 
 INSERT INTO App.Ingredient ([Name], [Description])
 VALUES ('Chicken breast', 'Skinned chicken breast'),

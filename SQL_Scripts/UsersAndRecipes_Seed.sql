@@ -22,6 +22,18 @@ VALUES
 (5, 'Hot dogs', 'Take a weiner and put it in the microwave for 5 mins', DATEFROMPARTS(2021, 9, 15)),
 (1, 'Chicken', 'Just boil it until it is cooked', GETDATE());
 
+INSERT INTO App.RecipeIngredient (RecipeId, IngredientId, Quantity, MeasureUnitId)
+VALUES
+(1, 1, 1, 14),
+(2, 1, 2, 14),
+(2, 5, 1, 16),
+(3, 5, 1, 16),
+(4, 4, 2, 16),
+(5, 7, 5, 12),
+(6, 6, 2, 8),
+(7, 1, 18, 12),
+(8, 1, 2, 14);
+
 
 -- TagType isn't defined yet, but we could start with something like
 --			1 = Allergy/Diet info,

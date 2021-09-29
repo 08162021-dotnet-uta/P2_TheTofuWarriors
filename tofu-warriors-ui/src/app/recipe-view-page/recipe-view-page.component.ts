@@ -34,6 +34,7 @@ export class RecipeViewPageComponent implements OnInit {
    this.recipeSubscription = this.recipePageData.subscribeToRecipe((recipe) => {
       console.log("Recipe view page: ", recipe);
       this.recipe = recipe;
+      this.updateExtraInfo();
     });
    }
 
@@ -41,17 +42,25 @@ export class RecipeViewPageComponent implements OnInit {
     this.recipeSubscription?.unsubscribe();
   }
 
-  ngOnChanges(): void {
+  updateExtraInfo(): void {
     this.currentUser = this.usersService.getCurrentUser();
     if (!this.currentUser) {
+      console.log("view updateExtraInfo 1");
       this.recipeEditable = false;
     } else if (!this.recipe) {
+      console.log("view updateExtraInfo 2");
       this.recipeEditable = false;
     } else if (this.currentUser.userId == null || this.currentUser.userId !== this.recipe.creatorUserId) {
+      console.log("view updateExtraInfo 3");
       this.recipeEditable = false;
     } else {
+      console.log("view updateExtraInfo 4");
       this.recipeEditable = true;
     }
+    console.log("view updateExtraInfo 5");
+  }
+
+  ngOnChanges(): void {
   }
 
   editRecipe(): void {

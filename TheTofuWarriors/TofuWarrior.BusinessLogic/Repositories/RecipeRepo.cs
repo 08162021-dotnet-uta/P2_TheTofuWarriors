@@ -46,19 +46,28 @@ namespace TofuWarrior.BusinessLogic.Repositories
         public async Task<List<ViewModelRecipe>> GetAllItemAsync()
         {
             
-            List<Recipe> recipes = await _context.Recipes.ToListAsync();
+            List<Recipe> recipes = await _context.Recipes
+				.Include(r => r.CreatorUser)
+				.Include(r => r.RecipeIngredients)
+				.ThenInclude(ri => ri.Ingredient)
+				.ToListAsync();
             List<ViewModelRecipe> views = new List<ViewModelRecipe>();
             foreach(Recipe r in recipes)
             {
-                views.Add(Mapper.RecipeToViewModelRecipe(r));
+				_logger.LogInformation("Recipe ingredient count: {0}", r.RecipeIngredients.Count);
+                views.Add(Mapper.ConvertToModel(r));
             }
             return views;
         }
 
         public async Task<ViewModelRecipe> GetItemsByIdAsync(int id)
         {
-            Recipe result = await _context.Recipes.FirstOrDefaultAsync(recipe => recipe.RecipeId == id) ;
-            ViewModelRecipe views = Mapper.RecipeToViewModelRecipe(result);
+            Recipe result = await _context.Recipes
+				.Include(r => r.CreatorUser)
+				.Include(r => r.RecipeIngredients)
+				.ThenInclude(ri => ri.Ingredient)
+				.FirstOrDefaultAsync(recipe => recipe.RecipeId == id) ;
+            ViewModelRecipe views = Mapper.ConvertToModel(result);
             return views;
         }
 

@@ -20,6 +20,7 @@ import { RecipeViewPageComponent } from './recipe-view-page/recipe-view-page.com
 import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.component';
 import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
 import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.com
     RecipeViewPageComponent,
     RecipeEditPageComponent,
     RecipeCreatePageComponent,
-    RecipeBasePageComponent
+    RecipeBasePageComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

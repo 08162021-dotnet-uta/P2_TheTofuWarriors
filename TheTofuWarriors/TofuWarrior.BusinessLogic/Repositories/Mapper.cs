@@ -75,6 +75,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			recipe.RecipeId = r.RecipeId;
 			recipe.Instructions = r.Instructions;
 			recipe.CreatorUserId = r.CreatorUserId;
+			recipe.Creator = ConvertToModel(r.CreatorUser);
 			recipe.CreationTime = r.CreationTime;
 			recipe.Name = r.Name;
 			recipe.Ingredients = (from ri in r.RecipeIngredients select ConvertToModel(ri)).ToList();

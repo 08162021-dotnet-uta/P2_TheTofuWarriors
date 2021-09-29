@@ -3,7 +3,7 @@ import { User } from './user';
 export interface Recipe {
   recipeId: number;
   creatorUserId: number;
-  creator: User;
+  creator: User | null;
   name: string;
   instructions: string;
   creationTime: Date;

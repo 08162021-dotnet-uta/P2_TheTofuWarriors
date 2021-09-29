@@ -3,7 +3,7 @@
 <div *ngIf="recipe">
   <h4>{{recipe.name}}</h4>
   <!-- TODO: get user info from recipe object? -->
-  <p>Created by: {{recipe.creator.firstName}} {{recipe.creator.lastName}}</p>
+  <p>Created by: <span *ngIf="recipe.creator">{{recipe.creator.firstName}} {{recipe.creator.lastName}}</span></p>
   <p>Ingredients:</p>
   <ul>
     <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.measureDescription}} {{ingredient.ingredientName}}</li>
