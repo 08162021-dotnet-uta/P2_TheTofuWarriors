@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule,FormControl,FormGroup } from '@angular/forms';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
+import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
     UserHomePageComponent,
     RecipeSearchPageComponent,
     UserProfilePageComponent,
-    RecipeDisplayComponent
+    RecipeDisplayComponent,
+    RecipeSearchTagPickerComponent
   ],
   imports: [
     BrowserModule,
