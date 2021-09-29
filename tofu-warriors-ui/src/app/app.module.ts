@@ -16,6 +16,10 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
+import { RecipeViewPageComponent } from './recipe-view-page/recipe-view-page.component';
+import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.component';
+import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
+import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recip
     UserProfilePageComponent,
     RecipeDisplayComponent,
     RecipesListComponent,
-    RecipeSearchTagPickerComponent
+    RecipeSearchTagPickerComponent,
+    RecipeViewPageComponent,
+    RecipeEditPageComponent,
+    RecipeCreatePageComponent,
+    RecipeBasePageComponent
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,10 @@ export class RecipeService {
     return this.httpClient.get<Recipe[]>(`${this.apiUrl}/User/${userId}/recipes`);
   }
 
+  getRecipeById(recipeId: number): Observable<Recipe> {
+    return this.httpClient.get<Recipe>(`${this.apiUrl}/Recipe/GetRecipeById?id=${recipeId}`);
+  }
+
   //get the recipe list
   getRecipeList():Observable<Recipe[]>{
     return this.httpClient.get<Recipe[]>(`${this.apiUrl}/Recipe/GetAllRecipes`);

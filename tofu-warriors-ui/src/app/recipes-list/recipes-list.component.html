@@ -1,7 +1,7 @@
 <div >
 	<h1>Recipes Lists</h1>
 	<ul class="recipes"></ul>
-	<li *ngFor ="let recipe of recipies"  (click)="onSelect(recipe)">
+	<li *ngFor ="let recipe of recipies" routerLink="/recipies/{{recipe.recipeId}}/view">
 		<span>{{recipe.name}} </span>
 		
 	</li>
