@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -14,6 +14,9 @@ export class RecipeService {
     private httpClient: HttpClient,
   ) { }
 
+  private jsonHeader = new HttpHeaders({
+    "Content-Type": "application/json"
+  });
   apiUrl: string = environment.tofuWarriorsApiUrl;
 
   getRecipesCreatedBy(userId: number): Observable<Recipe[]> {
@@ -23,5 +26,13 @@ export class RecipeService {
   //get the recipe list
   getRecipeList():Observable<Recipe[]>{
     return this.httpClient.get<Recipe[]>(`${this.apiUrl}/Recipe/GetAllRecipes`);
+  }
+  
+  searchRecipesByName(name: string): Observable<Recipe[]> {
+    return this.httpClient.get<Recipe[]>(`${this.apiUrl}/Recipe/SearchByIngredientName/${name}`);
+  }
+
+  searchRecipes(terms: string[], tags: any[]): Observable<Recipe[]> {
+    return this.httpClient.post<Recipe[]>(`${this.apiUrl}/Recipe/Search`, { terms, tags }, { headers: this.jsonHeader });
   }
 }

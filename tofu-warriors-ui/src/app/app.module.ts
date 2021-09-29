@@ -15,6 +15,7 @@ import { UserProfilePageComponent } from './user-profile-page/user-profile-page.
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
+import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { RecipesListComponent } from './recipes-list/recipes-list.component';
     RecipeSearchPageComponent,
     UserProfilePageComponent,
     RecipeDisplayComponent,
+<<<<<<< HEAD
     RecipesListComponent
+=======
+    RecipeSearchTagPickerComponent
+>>>>>>> main
   ],
   imports: [
     BrowserModule,

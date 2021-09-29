@@ -12,13 +12,11 @@ namespace TofuWarrior.Tests.RepositoryTests.DatabaseMock
 	public class MockTofuWarriorsDB : TheTofuWarriorsDBContext
 	{
 
-		private static DbContextOptions<TheTofuWarriorsDBContext> GetOptions() {
-			var opts = new DbContextOptionsBuilder<TheTofuWarriorsDBContext>()
+		private static DbContextOptions<TheTofuWarriorsDBContext> _opts =
+			new DbContextOptionsBuilder<TheTofuWarriorsDBContext>()
 				.UseInMemoryDatabase("TheTofuWarriorsDB")
 				.Options;
-			return opts;
-		}
-		public MockTofuWarriorsDB() : base(GetOptions())
+		public MockTofuWarriorsDB() : base(_opts)
 		{
 			
 		}
@@ -31,8 +29,6 @@ namespace TofuWarrior.Tests.RepositoryTests.DatabaseMock
 
 		public void AddDefaultMeasureUnits()
 		{
-			MeasureUnits.Add(new MeasureUnit()
-);
 		}
 	}
 }

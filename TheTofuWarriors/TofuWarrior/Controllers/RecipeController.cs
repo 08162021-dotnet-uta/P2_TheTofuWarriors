@@ -42,11 +42,17 @@ namespace TofuWarrior.Controllers
             await _recipe.DeleteItemAsync(recipe);
         }
 
-        [HttpGet("SearchByIngredientName/{name}")]
-        public async Task<List<ViewModelRecipe>> SearchByIngredientName(string name)
+        [HttpPost("Search")]
+        public async Task<List<ViewModelRecipe>> SearchRecipes(RecipeSearchTerms data)
         {
-            return await _recipe.SearchByIngredientName(name);
+            return await _recipe.SearchRecipes(data.terms, data.tags);
         }
+
+		public class RecipeSearchTerms
+		{
+			public List<string> terms { get; set; }
+			public List<ViewModelTag> tags { get; set; }
+		}
 
     }
 }
