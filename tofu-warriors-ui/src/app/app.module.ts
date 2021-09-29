@@ -28,11 +28,8 @@ import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recip
     RecipeSearchPageComponent,
     UserProfilePageComponent,
     RecipeDisplayComponent,
-<<<<<<< HEAD
-    RecipesListComponent
-=======
+    RecipesListComponent,
     RecipeSearchTagPickerComponent
->>>>>>> main
   ],
   imports: [
     BrowserModule,
