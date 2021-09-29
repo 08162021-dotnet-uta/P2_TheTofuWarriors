@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule,FormControl,FormGroup } from '@angular/forms';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
+import { RecipesListComponent } from './recipes-list/recipes-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
     UserHomePageComponent,
     RecipeSearchPageComponent,
     UserProfilePageComponent,
-    RecipeDisplayComponent
+    RecipeDisplayComponent,
+    RecipesListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
