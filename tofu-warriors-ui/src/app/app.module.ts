@@ -14,7 +14,7 @@ import { FormsModule,FormControl,FormGroup } from '@angular/forms';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -33,8 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    NgbModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
