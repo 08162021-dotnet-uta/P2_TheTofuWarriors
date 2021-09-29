@@ -7,6 +7,9 @@ export interface Recipe {
   name: string;
   instructions: string;
   creationTime: Date;
+  isExternal: boolean;
+  imageUrl: string;
+  apiKey: string;
   ingredients: any[];
   tags: any[];
 }

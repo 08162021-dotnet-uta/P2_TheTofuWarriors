@@ -77,10 +77,27 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			recipe.CreatorUserId = r.CreatorUserId;
 			recipe.CreationTime = r.CreationTime;
 			recipe.Name = r.Name;
-			recipe.Ingredients = (from ri in r.RecipeIngredients select ConvertToModel(ri.Ingredient)).ToList();
+			recipe.Ingredients = (from ri in r.RecipeIngredients select ConvertToModel(ri)).ToList();
 			recipe.Tags = (from rt in r.RecipeTags select ConvertToModel(rt.Tag)).ToList();
 
 			return recipe;
+		}
+
+		public static ViewModelRecipeIngredient ConvertToModel(RecipeIngredient recipeIngredient)
+		{
+			if (recipeIngredient == null) return null;
+			var result = new ViewModelRecipeIngredient()
+			{
+				RecipeIngredientId = recipeIngredient.RecipeIngredientId,
+				IngredientId = recipeIngredient.IngredientId,
+				Quantity = recipeIngredient.Quantity,
+				IngredientName = recipeIngredient.Ingredient?.Name,
+				IngredientDescription = recipeIngredient.Ingredient?.Description,
+				MeasureUnitId = recipeIngredient.MeasureUnitId,
+				MeasureUnit = recipeIngredient.MeasureUnit?.Unit,
+				MeasureDescription = recipeIngredient.MeasureUnit?.Description
+			};
+			return result;
 		}
 
 		public static ViewModelIngredient ConvertToModel(Ingredient ingredient)

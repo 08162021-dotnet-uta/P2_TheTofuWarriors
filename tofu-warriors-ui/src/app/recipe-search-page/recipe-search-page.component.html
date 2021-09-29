@@ -3,35 +3,33 @@
 <div>
   <h1>Find a recipe: </h1>
   <div class="recipe-search">
-
-    <div class="recipe-search-status">
-      <p>{{status}}</p>
-    </div>
-    <!-- input to get search term -->
-    <div>
-      <label for="recipe-search-value-input">Enter term to search for</label>
-      <input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>
-    </div>
-
-    <!-- selector to get type of term (search based on recipe name/tag/etc) -->
-    <div>
-      <label for="recipe-search-type-selector">Choose search type</label>
-      <select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">
-        <option value="name_search">Name</option>
-        <option value="tag_search">Tag</option>
-        <option value="ingredient_search">Ingredient</option>
-      </select>
-    </div>
-
-    <button (click)="addSearchTerm()">Add to Search</button>
-
+    <app-recipe-search-tag-picker (addTag)="addSearchTag($event)" (addTerm)="addSearchTerm($event)"></app-recipe-search-tag-picker>
     <!-- current list of terms -->
     <div class="recipe-search-terms">
       <ul>
         <li *ngFor="let term of searchTerms">
-          <span class="recipe-search-term">{{term.value}} {{term.type}}</span> <button (click)="removeSearchTerm(term)"> Remove </button>
+          <span class="recipe-search-term">{{term}}</span> <button (click)="removeSearchTerm(term)"> Remove </button>
         </li>
       </ul>
+    </div>
+    <div class="recipe-search-tags">
+      <ul>
+        <li *ngFor="let tag of searchTags">
+          <span class="recipe-search-term">{{tag.name}}</span> <button (click)="removeSearchTag(tag)"> Remove </button>
+        </li>
+      </ul>
+    </div>
+    <br />
+    <button (click)="runSearch()">Search</button>
+    <button *ngIf="results.length" (click)="clearResults()">Clear</button>
+  </div>
+
+  <div *ngIf="results.length">
+    <h4>Results:</h4>
+    <div class="recipe-search-results">
+      <div *ngFor="let recipe of results">
+        <app-recipe-display [recipe]="recipe"></app-recipe-display>
+      </div>
     </div>
   </div>
 </div>
