@@ -24,13 +24,12 @@ export class CommentService {
   };
 
   getCommentsBy(recipeId: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.apiUrl}/Recipe/${recipeId}/comment`);
+    return this.http.get<Comment[]>(`${this.apiUrl}/Comment/${recipeId}`);
 
   }
   newComment(comment: Comment): Observable<Comment> {
-    const url = `${this.apiUrl}/Recipe/comment`;
-    return this.http.post<Comment>(url, comment, this.httpOptions)
-
+    const url = `${this.apiUrl}/Comment/add`;
+    return this.http.post<Comment>(url, comment, this.httpOptions);
 
   }
 }

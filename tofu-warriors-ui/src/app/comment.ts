@@ -7,6 +7,6 @@ export interface Comment {
   userId: number;
   recipeId: number;
   commentText: string;
-  commentTime: Time;
-  prevCommentId: number;
+  commentTime: Date;
+  prevCommentId: number | null;
 }

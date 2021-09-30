@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-add-comment',
@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-comment.component.css']
 })
 export class AddCommentComponent implements OnInit {
-
+  @Output() saveComment: EventEmitter<string> = new EventEmitter<string>()
   constructor() { }
+  data = {
+    commentText:""
+  }
+  ngOnInit(): void
+  {
 
-  ngOnInit(): void {
+  }
+  save(): void
+  {
+    this.saveComment.emit(this.data.commentText)
+    this.data.commentText=""
   }
 
 }
