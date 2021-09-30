@@ -145,6 +145,13 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				.Include(r => r.RecipeIngredients)
 				.ThenInclude(ri => ri.MeasureUnit);
 		}
+			public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
+		{
+			var userRecipes = await GetRecipesBaseQuery().Where(r=>r.CreatorUserId == userId).ToListAsync();
+			// (from u in _dbc.Users where u.UserId == userId select u.Recipes).FirstAsync();
+			return userRecipes.ToList().ConvertAll(Mapper.ConvertToModel);
+		}
+
 
         public async Task<List<ViewModelRecipe>> GetAllItemAsync()
         {

@@ -1,48 +1,48 @@
-<div> 
+<div>
 	<h1>Sign Up</h1>
-<form (submit)="signUp()">         
-	<div >
-		<div >
-			<label>
-				First Name<span >:</span>
-			</label> 
-			<br>
-			<input [(ngModel)]="firstName" name="firstName" type="text" required  />
+	<form>
+		<div>
+			<div>
+				<label>
+					First Name<span>:</span>
+				</label>
+				<br>
+				<input [(ngModel)]="firstName" name="firstName" type="text" required />
+			</div>
+
+			<div>
+				<label>
+					Last Name<span>:</span>
+				</label>
+				<br>
+				<input [(ngModel)]="lastName" name="lastName" type="text" required />
+			</div>
 		</div>
 
-		<div >
+		<div>
 			<label>
-				Last Name<span>:</span>
+				Email Address<span>:</span>
 			</label>
 			<br>
-			<input [(ngModel)]="lastName" name="lastName" type="text"required />
+			<input [(ngModel)]="email" name="email" type="email" required />
 		</div>
-	</div>
+		<div>
+			<label>
+				UserName<span>:</span>
+			</label>
+			<br>
+			<input [(ngModel)]="userName" name="userName" type="text" required />
+		</div>
+		<div>
+			<label>
+				Password<span>:</span>
+			</label>
+			<br>
+			<input [(ngModel)]="password" name="password" type="password" required />
+		</div>
+		<br>
+		<button (click)="signUp()" class="btn btn-primary btn-sm">Get Started</button>
 
-	<div >
-		<label>
-			Email Address<span>:</span>
-		</label>
-		<br>
-		<input [(ngModel)]="email" name="email" type="email"required />
-	</div>
-	<div >
-		<label>
-		 UserName<span>:</span>
-		</label>
-		<br>
-		<input [(ngModel)]="userName" name="userName" type="text"required />
-	</div>
-	<div >
-		<label>
-		 Password<span>:</span>
-		</label>
-		<br>
-		<input [(ngModel)]="password" name="password" type="password"required />
-	</div>
-	<br>
-	<button type="submit" >Get Started</button>
-	
 	</form>
 
 </div>

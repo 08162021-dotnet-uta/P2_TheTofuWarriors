@@ -1,0 +1,16 @@
+<div *ngIf="comment">
+	{{comment.commentText}}
+	<div *ngIf="showAddComment">
+		<app-add-comment (saveComment)="save($event)" (cancelEdit)="cancel()"></app-add-comment>
+	</div>
+	<div *ngIf="!showAddComment">
+		<button class="btn-add-comment" (click)="showAddComment=true">+ Add Comment</button>
+
+	</div>
+	<ul>
+		<li *ngFor="let comment of comment.subComments">
+			<app-comment-display [loadComment]="loadComment" [comment]="comment"></app-comment-display>
+		</li>
+	</ul>
+
+</div>

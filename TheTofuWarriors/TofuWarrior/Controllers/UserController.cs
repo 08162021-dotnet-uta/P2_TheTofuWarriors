@@ -12,9 +12,12 @@ namespace TofuWarrior.Controllers
 	public class UserController : ControllerBase
 	{
 		private IUserRepository _user;
-		public UserController(IUserRepository user) : base()
+		private IRepository _recipeRepo;
+		
+		public UserController(IUserRepository user, IRepository recipeRepo) : base()
 		{
 			_user = user;
+			_recipeRepo = recipeRepo;
 		}
 
 		[HttpGet("userlist")]
@@ -48,9 +51,9 @@ namespace TofuWarrior.Controllers
 
 		[HttpPost("register")]
 
-		public async Task Register(ViewModelUser newUser)
+		public async Task<ViewModelUser> Register(ViewModelUser newUser)
 		{
-			await _user.RegisterAsync(newUser);
+			return await _user.RegisterAsync(newUser);
 
 		}
 
@@ -58,7 +61,7 @@ namespace TofuWarrior.Controllers
 		[HttpGet("{userId}/recipes")]
 		public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
 		{
-			var recipes = await _user.GetUserRecipes(userId);
+			var recipes = await _recipeRepo.GetUserRecipes(userId);
 			return recipes;
 		}
 

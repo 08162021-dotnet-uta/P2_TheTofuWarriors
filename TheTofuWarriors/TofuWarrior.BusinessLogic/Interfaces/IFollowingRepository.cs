@@ -15,5 +15,9 @@ namespace TofuWarrior.BusinessLogic.Interfaces
 
         //remove following relationship
         Task UnFollowingAsync(ViewModelFollowing unfollow);
+        Task<List<ViewModelFollowing>> GetUserFollowingById(int userId);
+
+
+
     }
 }

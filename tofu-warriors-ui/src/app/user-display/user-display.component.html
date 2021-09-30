@@ -1,8 +1,16 @@
+<div>
 
 <ul>
   <li *ngFor="let u of usersList">
-    {{u.firstName}}
-    {{u.lastName}}
-    {{u.userName}}
+   <!-- <span>FirstName:</span> {{u.firstName}}
+   <span>LastName:</span>   {{u.lastName}} -->
+UserName:<a href="javascript:void(0)" (click)="showActivities(u)"> {{u.userName}}</a> 
+&nbsp; <button *ngIf="!hasFollowed(u.userId)" (click)="follow(u)" >Follow</button>
+&nbsp; <button *ngIf="hasFollowed(u.userId)" (click)="unfollow(u)">UnFollow</button>
   </li>
 </ul>
+<div *ngIf="userRecipeList && user"  >
+  <app-inflencer-activities [userRecipes]="userRecipeList" [userName]="influencerName"></app-inflencer-activities>
+</div>
+
+</div>
