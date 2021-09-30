@@ -17,7 +17,8 @@ export class RecipeCreatePageComponent implements OnInit {
   constructor(
     private location: Location,
     private users: UsersService,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private router: Router
   ) {
     this.currentUser = this.users.getCurrentUser();
     this.recipe = {
@@ -82,7 +83,9 @@ export class RecipeCreatePageComponent implements OnInit {
     this.recipe.recipeId = 0;
     this.subscriptions.push(this.recipeService.saveUserRecipe(this.recipe, this.currentUser).subscribe(recipe => {
       this.recipe = recipe;
-      this.location.go("../view");
+      let dest = `/recipies/${recipe.recipeId}/view`;
+      this.router.navigate([dest], { replaceUrl: true });
+      //this.location.replaceState(dest);
     }));
   }
 }

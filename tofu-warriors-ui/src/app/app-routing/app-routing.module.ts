@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'recipeSearch', component: RecipeSearchPageComponent },
   { path: 'user/:userId/profile', component: UserProfilePageComponent },
   { path: 'recipies', component: RecipesListComponent },
+  { path: 'recipies/create', component: RecipeCreatePageComponent },
   {
     path: 'recipies/:recipeId', component: RecipeBasePageComponent,
     children: [

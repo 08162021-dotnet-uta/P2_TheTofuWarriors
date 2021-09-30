@@ -95,8 +95,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				IngredientName = recipeIngredient.Ingredient?.Name,
 				IngredientDescription = recipeIngredient.Ingredient?.Description,
 				MeasureUnitId = recipeIngredient.MeasureUnitId,
-				MeasureUnit = recipeIngredient.MeasureUnit?.Unit,
-				MeasureDescription = recipeIngredient.MeasureUnit?.Description
+				MeasureUnit = ConvertToModel(recipeIngredient.MeasureUnit)
 			};
 			return result;
 		}
@@ -107,9 +106,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
 			var model = new ViewModelIngredient()
 			{
-				Name = ingredient.Name,
+				IngredientName = ingredient.Name,
 				IngredientId = ingredient.IngredientId,
-				Description = ingredient.Description
+				IngredientDescription = ingredient.Description
 			};
 			return model;
 		}

@@ -17,11 +17,35 @@ namespace TofuWarrior.Controllers
         {
             _recipe = recipe;
         }
+
+
+		/// <summary>
+		/// Add a recipe to database (only affects Recipe table)
+		/// </summary>
+		/// <param name="recipe"></param>
+		/// <returns></returns>
         [HttpPost("AddRecipe")]
         public async Task AddRecipe(ViewModelRecipe recipe)
         {
             await _recipe.CreateItemAsync(recipe);
         }
+
+		public class UserRecipeData
+		{
+			public ViewModelRecipe recipe { get; set; }
+			public ViewModelUser user { get; set; }
+		}
+
+		/// <summary>
+		/// Add/update a recipe in the database (including all accompanying data)
+		/// </summary>
+		/// <returns></returns>
+		[HttpPost("SaveUserRecipe")]
+		public async Task<ViewModelRecipe> AddUserRecipe(UserRecipeData data)
+		{
+			return await _recipe.SaveUserRecipe(data.recipe, data.user);
+		}
+
         [HttpGet("GetAllRecipes")]
         public async Task<List<ViewModelRecipe>> GetAllRecipes()
         {

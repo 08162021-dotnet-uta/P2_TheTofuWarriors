@@ -1,14 +1,16 @@
-<div >
-	<h1>Recipes Lists</h1>
-	<ul class="recipes"></ul>
-	<li *ngFor ="let recipe of recipies" routerLink="/recipies/{{recipe.recipeId}}/view">
-		<span>{{recipe.name}} </span>
-		
-	</li>
-	
+<div>
+  <h1>Recipes Lists</h1>
+  <button routerLink="/recipies/create">New Recipe</button>
+  <ul class="recipes">
+    <li *ngFor="let recipe of recipies" routerLink="/recipies/{{recipe.recipeId}}/view">
+      <span>{{recipe.name}} </span>
+
+    </li>
+  </ul>
+
 </div>
 
 <div *ngIf="selectedRecipe">
-	<app-recipe-display [recipe]="selectedRecipe" ></app-recipe-display>
+  <app-recipe-display [recipe]="selectedRecipe"></app-recipe-display>
 </div>
 

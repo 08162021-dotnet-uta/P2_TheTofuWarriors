@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe';
 import { RecipePageDataService } from '../recipe-page-data.service';
@@ -18,7 +19,8 @@ export class RecipeEditPageComponent implements OnInit {
     private recipePageData: RecipePageDataService,
     private recipeService: RecipeService,
     private users: UsersService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   subscriptions: Subscription[] = [];
@@ -51,7 +53,10 @@ export class RecipeEditPageComponent implements OnInit {
     }
     this.subscriptions.push(this.recipeService.saveUserRecipe(this.recipe, this.currentUser).subscribe(recipe => {
       this.recipe = recipe;
-      this.location.go("../view");
+      let dest = `/recipies/${recipe.recipeId}/view`;
+      this.router.navigate([dest]);
+      this.router.navigate([dest], { replaceUrl: true });
+      //this.location.replaceState(dest);
     }));
   }
 
