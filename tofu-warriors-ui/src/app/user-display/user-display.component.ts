@@ -33,16 +33,11 @@ export class UserDisplayComponent implements OnInit {
   loadUsers(): void {
     console.log("loading users 2");
     this.users.getUsers().subscribe(data => {
-<<<<<<< HEAD
   
     console.log(`Got user data: ${data}`)
       this.usersList = data;
       //should not show the user itself in the list of users in the homepage
  this.usersList=this.usersList.filter(ele=>ele.userId!==this.user?.userId);
-=======
-      console.log(`Got user data: `, data)
-      this.usersList = data
->>>>>>> main
     });
 
   }

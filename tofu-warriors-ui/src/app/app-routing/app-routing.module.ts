@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
 import { RouterModule,Routes } from '@angular/router';
-
-=======
-import { RouterModule, Routes } from '@angular/router';
->>>>>>> main
 import { LoginComponent } from '../login/login.component';
 import { RecipeBasePageComponent } from '../recipe-base-page/recipe-base-page.component';
 import { RecipeCreatePageComponent } from '../recipe-create-page/recipe-create-page.component';
@@ -23,9 +18,6 @@ const routes: Routes = [
   { path: 'home', component: UserHomePageComponent },
   { path: 'recipeSearch', component: RecipeSearchPageComponent },
   { path: 'user/:userId/profile', component: UserProfilePageComponent },
-<<<<<<< HEAD
-  { path: 'recipies', component: RecipesListComponent }
-=======
   { path: 'recipies', component: RecipesListComponent },
   { path: 'recipies/create', component: RecipeCreatePageComponent },
   {
@@ -36,7 +28,6 @@ const routes: Routes = [
       { path: 'clone', component: RecipeCreatePageComponent }
     ]
   }
->>>>>>> main
 ];
 
 @NgModule({
