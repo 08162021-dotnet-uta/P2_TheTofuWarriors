@@ -51,9 +51,9 @@ namespace TofuWarrior.Controllers
 
 		[HttpPost("register")]
 
-		public async Task Register(ViewModelUser newUser)
+		public async Task<ViewModelUser> Register(ViewModelUser newUser)
 		{
-			await _user.RegisterAsync(newUser);
+			return await _user.RegisterAsync(newUser);
 
 		}
 

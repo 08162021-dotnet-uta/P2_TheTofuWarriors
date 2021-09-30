@@ -30,7 +30,9 @@ export class UsersService {
   newUser(user:User):Observable<User>{
    
     const url = `${this.apiUrl}/User/register`;
-    return this.http.post<User>(url,user,this.httpOptions);
+    let result= this.http.post<User>(url,user,this.httpOptions).pipe(shareReplay())
+    result.subscribe(data => this.currentUser = data);
+    return result;
   }
 
   //log in.
