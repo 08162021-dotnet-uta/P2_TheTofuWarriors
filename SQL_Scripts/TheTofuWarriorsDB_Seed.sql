@@ -24,13 +24,28 @@ VALUES ('tsp', 'Teaspoon')
 	,('cup', 'One Cup');
 
 INSERT INTO App.Ingredient ([Name], [Description])
-VALUES ('Chicken breast', 'Skinned chicken breast'),
-	('Canned Pumpkin', 'Pumpkin from a can'),
-	('Jasmine Rice', 'Rice of the Jasmine variety'),
-	('Green Bell Pepper', 'A bell pepper that is green'),
-	('Onion', 'An onion'),
-	('Garlic', 'Fresh garlic cloves'),
-	('Garlic Powder', 'Powdered Garlic');
+VALUES
+('Chicken breast', 'Skinned chicken breast'),
+('Canned Pumpkin', 'Pumpkin from a can'),
+('Jasmine Rice', 'Rice of the Jasmine variety'),
+('Green Bell Pepper', 'A bell pepper that is green'),
+('Onion', 'An onion'),
+('Garlic', 'Fresh garlic cloves'),
+('Ground Beef', '80/20 ground beef'),
+('Banana', 'Fresh banana'),
+('Pork', 'Any cut of pork'),
+('Bacon', 'mmmm bacon'),
+('Cheese', 'Any variety of cheese'),
+('Beer', 'Probably something light'),
+('Ketchup', 'Who doesn''t use ketchup?'),
+('Mayonnaise', 'I hope I spelled mayonnaise right'),
+('Bread', 'Sliced bread'),
+('Anchovies', 'Fish'),
+('Pizza dough', 'Dough for making pizzas'),
+('Salt', 'Iodized salt'),
+('Pepper', 'Ground black peppercorns'),
+('Garlic Butter', 'Garlic flavored butter, YUM'),
+('Garlic Powder', 'Powdered Garlic');
 
 
 INSERT INTO App.[User](FirstName,LastName,Email,Username,[Password])
