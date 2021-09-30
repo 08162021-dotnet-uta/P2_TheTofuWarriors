@@ -21,12 +21,14 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
+import { InflencerActivitiesComponent } from './inflencer-activities/inflencer-activities.component';
 import { RecipeViewPageComponent } from './recipe-view-page/recipe-view-page.component';
 import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.component';
 import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
 import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker.component';
+import { CommentDisplayComponent } from './comment-display/comment-display.component';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,15 @@ import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker
 
     RecipesListComponent,
     RecipeSearchTagPickerComponent,
+    InflencerActivitiesComponent,
+
     RecipeViewPageComponent,
     RecipeEditPageComponent,
     RecipeCreatePageComponent,
     RecipeBasePageComponent,
     RecipeEditComponent,
-    IngredientPickerComponent
+    IngredientPickerComponent,
+    CommentDisplayComponent
   ],
   imports: [
     BrowserModule,

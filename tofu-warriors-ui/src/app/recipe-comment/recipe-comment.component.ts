@@ -27,11 +27,11 @@ export class RecipeCommentComponent implements OnInit {
   @Input() recipeId: number = 0;
 
   ngOnInit(): void {
-  this.loadComment()
+  this.loadComment(this.recipeId)
   }
-  loadComment(): void {
+  loadComment(recipeId:number): void {
 
-    this.commentService.getCommentsBy(this.recipeId).subscribe(comments => {
+    this.commentService.getCommentsBy(recipeId).subscribe(comments => {
       console.log(`Got comment: ${comments}`, comments)
       this.comments = comments
     });
@@ -48,10 +48,11 @@ export class RecipeCommentComponent implements OnInit {
       recipeId: this.recipeId,
       commentText: commentText,
       commentTime: new Date(),
-      prevCommentId: null
+      prevCommentId: null,
+      subComments:[]
     }
     this.commentService.newComment(comment).subscribe(data => {
-    this.loadComment()
+    this.loadComment(this.recipeId)
     })
     
   }

@@ -7,6 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class AddCommentComponent implements OnInit {
   @Output() saveComment: EventEmitter<string> = new EventEmitter<string>()
+  @Output() cancelEdit: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
   data = {
     commentText:""
@@ -18,6 +19,11 @@ export class AddCommentComponent implements OnInit {
   save(): void
   {
     this.saveComment.emit(this.data.commentText)
+    this.data.commentText=""
+  }
+  cancel(): void
+  {
+   this.cancelEdit.emit();
     this.data.commentText=""
   }
 

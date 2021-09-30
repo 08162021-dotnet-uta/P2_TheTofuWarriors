@@ -16,5 +16,6 @@ namespace TofuWarrior.BusinessLogic.Interfaces
         Task<Recipe> CreateItemAsync(ViewModelRecipe item);
 		Task<List<ViewModelRecipe>> SearchRecipes(List<string> ingredientNames, List<ViewModelTag> tags);
 		Task<ViewModelRecipe> SaveUserRecipe(ViewModelRecipe recipe, ViewModelUser user);
+        Task<List<ViewModelRecipe>> GetUserRecipes(int userId);
     }
 }

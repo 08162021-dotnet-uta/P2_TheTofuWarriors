@@ -34,11 +34,21 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			return ConvertToModel(user);
 		}
 
-		public async Task RegisterAsync(ViewModelUser newUser)
+		public async Task<ViewModelUser> RegisterAsync(ViewModelUser newUser)
 		{
-
-			var user = await _dbc.Database.ExecuteSqlRawAsync("INSERT INTO App.[User](FirstName,LastName,Email,Username,[Password]) VALUES ({0},{1},{2},{3},{4})", newUser.FirstName, newUser.LastName, newUser.Email, newUser.UserName, newUser.Password);
+			var user = new User
+			{
+				FirstName = newUser.FirstName,
+				LastName = newUser.LastName,
+				Email = newUser.Email,
+				Username = newUser.UserName,
+				Password = newUser.Password
+			};
+			_dbc.Users.Add(user);
+			await _dbc.SaveChangesAsync();
+			return ConvertToModel(user);
 		}
+
 
 		public async Task<ViewModelUser> FindUserAsync(string username)
 		{
@@ -48,17 +58,17 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
 		}
 
-		public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
-		{
-			var userRecipes = await (from u in _dbc.Users where u.UserId == userId select u.Recipes).FirstAsync();
-			return userRecipes.ToList().ConvertAll(ConvertToModel);
-		}
 
 		public async Task<ViewModelUser> GetUserById(int userId)
 		{
 			var user = await (from u in _dbc.Users where u.UserId == userId select u).FirstAsync();
 			return ConvertToModel(user);
 		}
+
+		//get all influencer's info based on userId
+
+
+
 
 	}
 }

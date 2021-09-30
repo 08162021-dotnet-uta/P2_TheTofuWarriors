@@ -36,6 +36,12 @@ namespace TofuWarrior.Controllers
             await _followingRepository.UnFollowingAsync(unfollow);
             return Ok(new { Success = true });
         }
+        [HttpGet("{userId}")]
+		public async Task<List<ViewModelFollowing>> GetFollowingsById(int userId)
+		{
+			return await _followingRepository.GetUserFollowingById(userId);
+		
+		}
 
     }
 }

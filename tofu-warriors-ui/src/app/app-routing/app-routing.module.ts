@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule,Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { RecipeBasePageComponent } from '../recipe-base-page/recipe-base-page.component';
 import { RecipeCreatePageComponent } from '../recipe-create-page/recipe-create-page.component';
