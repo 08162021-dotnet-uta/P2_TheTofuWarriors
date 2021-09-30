@@ -2,10 +2,12 @@
 <h1 *ngIf="userName">{{userName}}'s recipe</h1>
 <ul >
 <li *ngFor="let recipe of userRecipes">
-<span>{{recipe.name}}</span> 
-<span>{{recipe.instructions}}</span>
-<span>{{recipe.ingredients}}</span>
+{{recipe.name}}
+{{recipe.ingredients}}
+<p> Instrunctions:</p>
+{{recipe.instructions}}
 </li>
 </ul>
+
 
 </div>

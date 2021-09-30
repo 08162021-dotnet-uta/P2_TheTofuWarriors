@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { User } from './user';
-import { Following } from './Following';
+import { Following } from './following';
 import { Recipe } from './recipe';
 
 @Injectable({

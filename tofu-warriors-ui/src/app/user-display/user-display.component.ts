@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscriber } from 'rxjs';
-import { Following } from '../Following';
+import { Following } from '../following';
 import { Recipe } from '../recipe';
 import { User } from '../user';
 import { UsersService } from '../users.service';
