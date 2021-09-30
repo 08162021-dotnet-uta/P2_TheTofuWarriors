@@ -46,7 +46,7 @@ export class UserDisplayComponent implements OnInit {
   //   console.log(`here is the infId ${this.influencerId}`)
   //   this.follow();
   // }
-  //O(n^2) => O()n
+ 
   hasFollowed(influencerId: number):boolean{
     return this.infulencers.filter(i=> i.influencerId === influencerId).length > 0;
   }
