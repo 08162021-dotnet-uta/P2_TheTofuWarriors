@@ -11,6 +11,7 @@ export class RecipeDisplayComponent implements OnInit {
   constructor() { }
 
   @Input() recipe: Recipe | null = null;
+  @Input() displayComments: boolean = true;
 
   ngOnInit(): void {
   }
@@ -25,12 +26,14 @@ export class RecipeDisplayComponent implements OnInit {
         return 'bg-primary';
       case 2:
         return 'bg-secondary';
+      case 3:
+        return 'bg-danger';
       case 5:
         return 'bg-success';
       case 4:
         return 'bg-info';
       case 6:
-        return 'bg-danger';
+        return 'bg-primary';
       default:
         return '';
     }
