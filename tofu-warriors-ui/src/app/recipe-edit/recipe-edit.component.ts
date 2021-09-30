@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Ingredient } from '../ingredient';
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
+import { RecipeTag } from '../search-term';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -23,12 +24,17 @@ export class RecipeEditComponent implements OnInit {
   @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   showIngredientPicker: boolean = false;
+  showTagPicker: boolean = false;
 
   ngOnInit(): void {
   }
 
   toggleIngredientPicker() {
     this.showIngredientPicker = !this.showIngredientPicker;
+  }
+
+  toggleTagPicker() {
+    this.showTagPicker = !this.showTagPicker;
   }
 
   addIngredient(ingredient: Ingredient) {
@@ -43,6 +49,31 @@ export class RecipeEditComponent implements OnInit {
       return;
     }
     this.recipe.ingredients.push(ingredient);
+  }
+
+  tagMatch(t1: RecipeTag, t2: RecipeTag): boolean {
+    return (t1.tagId == t2.tagId && t1.name == t2.name && t1.tagType == t2.tagType);
+  }
+
+  addTag(tag: RecipeTag) {
+    if (!this.recipe) {
+      return;
+    }
+    if (!this.recipe.tags) {
+      this.recipe.tags = [];
+    }
+    if (this.recipe.tags.find(t => this.tagMatch(t, tag))) {
+      // tag already added to recipe
+      return;
+    }
+    this.recipe.tags.push(tag);
+  }
+
+  removeTag(tag: RecipeTag) {
+    if (!this.recipe) {
+      return;
+    }
+    this.recipe.tags = this.recipe.tags.filter(t => !this.tagMatch(t, tag));
   }
 
   isMatch(i1: Ingredient, i2: Ingredient): boolean {
