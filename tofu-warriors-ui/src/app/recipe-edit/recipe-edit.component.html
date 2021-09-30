@@ -29,7 +29,7 @@
   </ul>
   <!-- tag picker component -->
   <div *ngIf="showTagPicker">
-    <app-tag-picker [showCancel]="true" (addTag)="addTag($event)" (close)="toggleTagPicker()"></app-tag-picker>
+    <app-tag-picker [showCancel]="true" (addTag)="addTag($event)" (close)="toggleTagPicker()">Add Tag</app-tag-picker>
   </div>
   <div *ngIf="!showTagPicker">
     <button (click)="toggleTagPicker()">Add Tag</button>

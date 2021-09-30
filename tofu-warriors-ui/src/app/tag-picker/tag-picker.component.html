@@ -1,6 +1,6 @@
 
   <div>
-    <label for="recipe-search-type-selector">Choose search type</label>
+    <label for="recipe-search-type-selector">Choose tag</label>
     <!--<select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">-->
     <select id="tag-picker" name="tag-picker" #tag_picker>
       <optgroup *ngFor="let group of tags" [label]="group.label">
@@ -13,7 +13,7 @@
       -->
     </select>
     <div class="tag-picker-actions">
-      <button (click)="submit(tag_picker.value)">Add to Search</button>
+      <button (click)="submit(tag_picker.value)"><ng-content></ng-content></button>
       <button *ngIf="showCancel" (click)="cancel()">Cancel</button>
     </div>
   </div>

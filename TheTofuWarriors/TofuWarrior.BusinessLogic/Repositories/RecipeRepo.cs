@@ -100,8 +100,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			{
 				_context.RecipeIngredients.RemoveRange(newRecipe.RecipeIngredients);
 				_context.RecipeTags.RemoveRange(newRecipe.RecipeTags);
-				await _context.SaveChangesAsync();
 				newRecipe.RecipeIngredients.Clear();
+				newRecipe.RecipeTags.Clear();
+				await _context.SaveChangesAsync();
 			}
 			newRecipe.RecipeIngredients = await CreateRecipeIngredients(recipe);
 			newRecipe.RecipeTags = await CreateRecipeTags(recipe);
@@ -143,7 +144,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				.Include(r => r.RecipeIngredients)
 				.ThenInclude(ri => ri.Ingredient)
 				.Include(r => r.RecipeIngredients)
-				.ThenInclude(ri => ri.MeasureUnit);
+				.ThenInclude(ri => ri.MeasureUnit)
+				.Include(r => r.RecipeTags)
+				.ThenInclude(rt => rt.Tag);
 		}
 			public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
 		{

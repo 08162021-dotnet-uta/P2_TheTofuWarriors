@@ -8,6 +8,21 @@
   <ul>
     <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.measureUnit?.description}} {{ingredient.ingredientName}}</li>
   </ul>
+  <p *ngIf="recipe.tags">Tags:</p>
+  <div class="container-fluid" *ngIf="recipe.tags">
+    <div class="row">
+      <div class="col-6">
+        <span *ngFor="let tag of recipe.tags" class="badge  mx-2" [ngClass]="getTagClass(tag.tagType)">{{tag.name}}</span>
+      </div>
+    </div>
+    <!--
+    <div class="row row-cols-auto">
+      <div class="col" *ngFor="let tag of recipe.tags">
+        <span class="badge bg-primary">{{tag.name}}</span>
+      </div>
+    </div>
+    -->
+  </div>
   <p>Instructions:</p>
   <p>{{recipe.instructions}}</p>
   <app-recipe-comment [recipeId]="recipe.recipeId"></app-recipe-comment>

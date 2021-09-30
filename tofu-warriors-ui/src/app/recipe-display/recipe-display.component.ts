@@ -19,4 +19,21 @@ export class RecipeDisplayComponent implements OnInit {
     console.log("recipe display:", this.recipe);
   }
 
+  getTagClass(tagType: number): string {
+    switch (tagType) {
+      case 1:
+        return 'bg-primary';
+      case 2:
+        return 'bg-secondary';
+      case 5:
+        return 'bg-success';
+      case 4:
+        return 'bg-info';
+      case 6:
+        return 'bg-danger';
+      default:
+        return '';
+    }
+  }
+
 }
