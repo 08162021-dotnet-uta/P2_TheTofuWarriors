@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Recipe } from '../recipe';
+import { RecipeService } from '../recipe.service';
+import { RecipeTag, SearchTerm } from '../search-term';
 
-interface SearchTerm {
-  value: string;
-  type: string;
-}
 
 @Component({
   selector: 'app-recipe-search-page',
@@ -12,39 +11,81 @@ interface SearchTerm {
 })
 export class RecipeSearchPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private recipeService: RecipeService
+  ) { }
 
-  searchTerms: any[] = [];
-  curTerm: string = "";
-  curType: string = "";
+  searchTerms: string[] = [];
+  searchTags: RecipeTag[] = [];
+  results: Recipe[] = [];
+  /*
+  curTerm = {
+    value: "",
+    type: ""
+  }
+  */
   status: string = "";
 
   ngOnInit(): void {
   }
 
-  updateType(event: any) {
-    this.curType = event.target.value;
-  }
-
-  addSearchTerm() {
-    if (!this.curTerm || !this.curType) {
+  addSearchTerm(term: string) {
+    /*
+    if (!term.value || !term.type) {
       this.status = "Please enter term and select type";
       return;
     } else {
       this.status = "";
     }
-    console.log(`Adding term ${this.curTerm}, ${this.curType}`);
-    this.searchTerms.push({ value: this.curTerm, type: this.curType });
+    console.log(`Adding term ${term.value}, ${term.type}`);
+    */
+    console.log("adding term", term);
+    this.searchTerms.push(term);
   }
 
-  updateTerm(event: any) {
-    console.log(event);
-    this.curTerm = event.target.value;
+  addSearchTag(tag: RecipeTag) {
+    this.searchTags.push(tag);
   }
 
-  removeSearchTerm(term: any) {
+  removeSearchTerm(term: string) {
     console.log("removing", term);
     this.searchTerms = this.searchTerms.filter(t => t != term);
+  }
+
+  removeSearchTag(tag: RecipeTag) {
+    this.searchTags = this.searchTags.filter(t => t != tag);
+  }
+
+  clearResults() {
+    this.results = [];
+  }
+
+  runSearch() {
+    console.log("Searching... ", this.searchTerms);
+    if (!this.searchTerms) {
+      // TODO: show message requiring search terms
+      return;
+    }
+    this.recipeService.searchRecipes(this.searchTerms, this.searchTags).subscribe(recipes => {
+      console.log("Search results: ", recipes);
+      this.results = recipes
+    });
+    return;
+    /*
+    var name = "";
+    for (const term of this.searchTerms) {
+      if (term.type == 0) {
+        name = term.value;
+        break;
+      }
+    }
+    if (name) {
+      this.recipeService.searchRecipesByName(name).subscribe(recipes => {
+        console.log("recipes", recipes);
+        this.results = recipes;
+      });
+    }
+    */
   }
 
 }

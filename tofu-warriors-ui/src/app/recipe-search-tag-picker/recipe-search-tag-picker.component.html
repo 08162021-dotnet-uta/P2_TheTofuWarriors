@@ -1,0 +1,31 @@
+
+    <div class="recipe-search-status">
+      <p>{{status}}</p>
+    </div>
+    <!-- input to get search term -->
+    <div>
+      <label for="recipe-search-value-input">Enter term to search for</label>
+      <!--<input id="recipe-search-value-input" name="recipe-search-value" [value]="curTerm" (change)="updateTerm($event)" placeholder="Enter search term"/>-->
+      <input id="recipe-search-value-input" name="recipe-search-value" #name_input placeholder="Enter search term"/>
+      <button (click)="addSearchTerm(name_input.value)">Add to Search</button>
+    </div>
+
+    <!-- selector to get type of term (search based on recipe name/tag/etc) -->
+    <div>
+      <label for="recipe-search-type-selector">Choose search type</label>
+      <!--<select id="recipe-search-type-selector" name="recipe-search-type" [value]="curType" (change)="updateType($event)">-->
+      <select id="recipe-search-type-selector" name="recipe-search-type" #tag_picker>
+        <optgroup *ngFor="let group of getValidTags()" [label]="group.label">
+          <option *ngFor="let tag of group.tags" [value]="tag">{{tag}}</option>
+        </optgroup>
+        <!--
+        <option value="name_search">Name</option>
+        <option value="tag_search">Tag</option>
+        <option value="ingredient_search">Ingredient</option>
+        -->
+      </select>
+      <button (click)="addSearchTag(tag_picker.value)">Add to Search</button>
+    </div>
+
+
+

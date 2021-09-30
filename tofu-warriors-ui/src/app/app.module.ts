@@ -13,9 +13,15 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule,FormControl,FormGroup } from '@angular/forms';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
+<<<<<<< HEAD
 import { RecipeCommentComponent } from './recipe-comment/recipe-comment.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 
+=======
+import { RecipesListComponent } from './recipes-list/recipes-list.component';
+
+import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
+>>>>>>> ebd37682e4bf12f7570006dd8f16bb0baabefac1
 
 @NgModule({
   declarations: [
@@ -28,9 +34,14 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
     RecipeSearchPageComponent,
     UserProfilePageComponent,
     RecipeDisplayComponent,
+<<<<<<< HEAD
     RecipeCommentComponent,
     AddCommentComponent,
 
+=======
+    RecipesListComponent,
+    RecipeSearchTagPickerComponent
+>>>>>>> ebd37682e4bf12f7570006dd8f16bb0baabefac1
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<div >
+	<h1>Recipes Lists</h1>
+	<ul class="recipes"></ul>
+	<li *ngFor ="let recipe of recipies"  (click)="onSelect(recipe)">
+		<span>{{recipe.name}} </span>
+		
+	</li>
+	
+</div>
+
+<div *ngIf="selectedRecipe">
+	<app-recipe-display [recipe]="selectedRecipe" ></app-recipe-display>
+</div>
+

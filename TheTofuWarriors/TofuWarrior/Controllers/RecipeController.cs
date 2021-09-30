@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using TheTofuWarrior.Model.ViewModels;
 using TofuWarrior.BusinessLogic.Interfaces;
@@ -40,6 +41,18 @@ namespace TofuWarrior.Controllers
         {
             await _recipe.DeleteItemAsync(recipe);
         }
+
+        [HttpPost("Search")]
+        public async Task<List<ViewModelRecipe>> SearchRecipes(RecipeSearchTerms data)
+        {
+            return await _recipe.SearchRecipes(data.terms, data.tags);
+        }
+
+		public class RecipeSearchTerms
+		{
+			public List<string> terms { get; set; }
+			public List<ViewModelTag> tags { get; set; }
+		}
 
     }
 }
