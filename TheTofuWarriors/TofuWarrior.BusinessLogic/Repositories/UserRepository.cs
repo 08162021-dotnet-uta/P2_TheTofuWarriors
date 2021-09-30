@@ -48,12 +48,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
 
 		}
 
-		public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
-		{
-			var userRecipes = await (from u in _dbc.Users where u.UserId == userId select u.Recipes).FirstAsync();
-			return userRecipes.ToList().ConvertAll(ConvertToModel);
-		}
-
+	
 		public async Task<ViewModelUser> GetUserById(int userId)
 		{
 			var user = await (from u in _dbc.Users where u.UserId == userId select u).FirstAsync();

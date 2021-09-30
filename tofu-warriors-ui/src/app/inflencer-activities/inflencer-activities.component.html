@@ -1,13 +1,10 @@
 <div>
-<h1 *ngIf="userName">{{userName}}'s recipe</h1>
-<ul >
-<li *ngFor="let recipe of userRecipes">
-{{recipe.name}}
-{{recipe.ingredients}}
-<p> Instrunctions:</p>
-{{recipe.instructions}}
-</li>
-</ul>
+	<h1 *ngIf="userName">{{userName}}'s recipe</h1>
+	<ul>
+		<li *ngFor="let recipe of userRecipes">
+			<app-recipe-display [recipe]="recipe"></app-recipe-display>
+		</li>
+	</ul>
 
 
 </div>

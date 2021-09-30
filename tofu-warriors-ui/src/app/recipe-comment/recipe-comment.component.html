@@ -2,9 +2,12 @@
 
 <ul>
   <li *ngFor="let c of comments">
-    {{c.commentText}}
+    <!-- {{c.commentText}} -->
+    <app-comment-display [loadComment]="loadComment.bind(this)" [comment]="c"></app-comment-display>
   </li>
 
 </ul>
 
-<div><app-add-comment (saveComment)="saveComment($event)"></app-add-comment></div>
+<div>
+  <app-add-comment (saveComment)="saveComment($event)"></app-add-comment>
+</div>

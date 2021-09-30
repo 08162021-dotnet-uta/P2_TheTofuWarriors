@@ -12,7 +12,7 @@ namespace TofuWarrior.BusinessLogic.Interfaces
 		Task RegisterAsync(ViewModelUser newUser);
 
 		Task<ViewModelUser> FindUserAsync(string username);
-		Task<List<ViewModelRecipe>> GetUserRecipes(int userId);
+		//Task<List<ViewModelRecipe>> GetUserRecipes(int userId);
 		Task<ViewModelUser> GetUserById(int userId);
   }
 }

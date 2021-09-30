@@ -28,6 +28,7 @@ import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-pa
 import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker.component';
+import { CommentDisplayComponent } from './comment-display/comment-display.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker
     RecipeCreatePageComponent,
     RecipeBasePageComponent,
     RecipeEditComponent,
-    IngredientPickerComponent
+    IngredientPickerComponent,
+    CommentDisplayComponent
   ],
   imports: [
     BrowserModule,

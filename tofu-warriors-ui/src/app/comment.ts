@@ -9,4 +9,5 @@ export interface Comment {
   commentText: string;
   commentTime: Date;
   prevCommentId: number | null;
+  subComments: Comment[];
 }
