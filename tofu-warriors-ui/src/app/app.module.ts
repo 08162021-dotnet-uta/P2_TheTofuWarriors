@@ -13,6 +13,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule,FormControl,FormGroup } from '@angular/forms';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
+
+import { RecipeCommentComponent } from './recipe-comment/recipe-comment.component';
+import { AddCommentComponent } from './add-comment/add-comment.component';
+
+
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
@@ -34,6 +39,10 @@ import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker
     RecipeSearchPageComponent,
     UserProfilePageComponent,
     RecipeDisplayComponent,
+    RecipeCommentComponent,
+    AddCommentComponent,
+
+
     RecipesListComponent,
     RecipeSearchTagPickerComponent,
     RecipeViewPageComponent,
