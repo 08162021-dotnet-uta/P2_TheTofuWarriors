@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Recipe } from './recipe';
+import { User } from './user';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -38,5 +39,10 @@ export class RecipeService {
 
   searchRecipes(terms: string[], tags: any[]): Observable<Recipe[]> {
     return this.httpClient.post<Recipe[]>(`${this.apiUrl}/Recipe/Search`, { terms, tags }, { headers: this.jsonHeader });
+  }
+
+  saveUserRecipe(recipe: Recipe, user: User) {
+
+    return this.httpClient.post<Recipe>(`${this.apiUrl}/Recipe/SaveUserRecipe`, { recipe, user }, { headers: this.jsonHeader });
   }
 }

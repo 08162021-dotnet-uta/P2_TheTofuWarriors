@@ -7,8 +7,8 @@ export interface MeasureUnit {
 
 export interface Ingredient {
   ingredientId: number;
-  name: string;
-  description: string;
+  ingredientName: string;
+  ingredientDescription: string;
   quantity: number;
   measureUnitId: number;
   measureUnit: MeasureUnit | null;

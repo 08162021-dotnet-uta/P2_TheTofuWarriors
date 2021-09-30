@@ -3,7 +3,7 @@
   <div>
     <label for="ingredient_picker">Ingredient </label>
     <select id="ingredient_picker" name="ingredientId" [(ngModel)]="data.ingredientId">
-      <option *ngFor="let ingredient of ingredients" [value]="ingredient.ingredientId">{{ingredient.name}}</option>
+      <option *ngFor="let ingredient of ingredients" [value]="ingredient.ingredientId">{{ingredient.ingredientName}}</option>
     </select>
   </div>
   <div>
@@ -12,9 +12,12 @@
   </div>
   <div>
     <label for="ingredient_measure">Measurement unit</label>
-    <select id="ingredient_measure" name="measureId" [(ngModel)]="data.measureId">
+    <select id="ingredient_measure" name="measureId" [(ngModel)]="data.measureUnitId">
       <option *ngFor="let measure of measures" [value]="measure.measureUnitId">{{measure.description}}</option>
     </select>
   </div>
-  <button (click)="addIngredient()">Add ingredient</button>
+  <div class="ingredient-picker-actions">
+    <button (click)="addIngredient()">Add</button>
+    <button (click)="closePicker()">Cancel</button>
+  </div>
 </div>

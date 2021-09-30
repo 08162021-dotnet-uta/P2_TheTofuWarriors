@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Ingredient } from '../ingredient';
 import { Recipe } from '../recipe';
+import { RecipeService } from '../recipe.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -10,11 +14,21 @@ import { Recipe } from '../recipe';
 export class RecipeEditComponent implements OnInit {
 
   constructor(
+    private location: Location,
+    private recipeService: RecipeService,
+    private users: UsersService
   ) { }
 
   @Input() recipe: Recipe | null = null;
+  @Output() save: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  showIngredientPicker: boolean = false;
 
   ngOnInit(): void {
+  }
+
+  toggleIngredientPicker() {
+    this.showIngredientPicker = !this.showIngredientPicker;
   }
 
   addIngredient(ingredient: Ingredient) {
@@ -48,6 +62,14 @@ export class RecipeEditComponent implements OnInit {
       return;
     }
     this.recipe.ingredients = this.recipe.ingredients.filter(i => !this.isMatch(i, ingredient));
+  }
+
+  saveRecipe(): void {
+    this.save.emit(true);
+  }
+
+  cancelEdits(): void {
+    this.save.emit(false);
   }
 
 }

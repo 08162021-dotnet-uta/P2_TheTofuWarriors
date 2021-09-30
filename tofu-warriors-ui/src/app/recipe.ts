@@ -1,3 +1,4 @@
+import { Ingredient } from './ingredient';
 import { User } from './user';
 
 export interface Recipe {
@@ -10,6 +11,6 @@ export interface Recipe {
   isExternal: boolean;
   imageUrl: string;
   apiKey: string;
-  ingredients: any[];
+  ingredients: Ingredient[];
   tags: any[];
 }

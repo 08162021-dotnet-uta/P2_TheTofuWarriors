@@ -1,7 +1,11 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe';
 import { RecipePageDataService } from '../recipe-page-data.service';
+import { RecipeService } from '../recipe.service';
+import { User } from '../user';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-recipe-edit-page',
@@ -11,21 +15,44 @@ import { RecipePageDataService } from '../recipe-page-data.service';
 export class RecipeEditPageComponent implements OnInit {
 
   constructor(
-    private recipePageData: RecipePageDataService
+    private recipePageData: RecipePageDataService,
+    private recipeService: RecipeService,
+    private users: UsersService,
+    private location: Location
   ) { }
 
-  recipeSubscription: Subscription | null = null;
+  subscriptions: Subscription[] = [];
   recipe: Recipe | null = null;
+  currentUser: User | null = null;
 
   ngOnInit(): void {
-   this.recipeSubscription = this.recipePageData.subscribeToRecipe((recipe) => {
+    this.currentUser = this.users.getCurrentUser();
+    this.subscriptions.push(this.recipePageData.subscribeToRecipe((recipe) => {
       console.log("Recipe view page: ", recipe);
       this.recipe = recipe;
-    });
+    }));
   }
 
   ngOnDestroy(): void {
-    this.recipeSubscription?.unsubscribe();
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  saveChanges(shouldSave: boolean): void {
+    if (!shouldSave) {
+      this.location.back();
+      return;
+    }
+    if (!this.recipe) {
+      // this really shouldn't be possible... the button shouldn't show up if there isn't a recipe
+      throw new Error("No recipe data found");
+    }
+    if (!this.currentUser) {
+      throw new Error("Must be logged in to edit recipe");
+    }
+    this.subscriptions.push(this.recipeService.saveUserRecipe(this.recipe, this.currentUser).subscribe(recipe => {
+      this.recipe = recipe;
+      this.location.go("../view");
+    }));
   }
 
 }

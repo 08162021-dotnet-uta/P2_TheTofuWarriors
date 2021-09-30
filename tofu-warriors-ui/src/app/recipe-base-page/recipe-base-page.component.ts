@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe';
 import { RecipePageDataService } from '../recipe-page-data.service';
@@ -20,7 +20,8 @@ export class RecipeBasePageComponent implements OnInit {
     private recipePageData: RecipePageDataService,
     private usersService: UsersService,
     private location: Location
-  ) { }
+  ) {
+  }
 
   recipe: Recipe | null = null;
   currentUser: User | null = null;

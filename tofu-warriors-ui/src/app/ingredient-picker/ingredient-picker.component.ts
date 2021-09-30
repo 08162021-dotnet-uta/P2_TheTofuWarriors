@@ -15,13 +15,14 @@ export class IngredientPickerComponent implements OnInit {
   ) { }
 
   @Output() add = new EventEmitter<Ingredient>();
+  @Output() close = new EventEmitter<any>();
 
   ingredients: Ingredient[] = [];
   measures: MeasureUnit[] = [];
 
   data = {
     quantity: 0,
-    measureId: 0,
+    measureUnitId: 0,
     ingredientId: 0
   }
 
@@ -45,12 +46,16 @@ export class IngredientPickerComponent implements OnInit {
   addIngredient() {
     let id: number = this.data.ingredientId;
     let ingredient = this.ingredients.find(i => i.ingredientId == id);
-    let measure = this.measures.find(m => m.measureUnitId == this.data.measureId);
+    let measure = this.measures.find(m => m.measureUnitId == this.data.measureUnitId);
     if (ingredient) {
       let data = { ...ingredient, ...this.data, measureUnit: measure || null }
       console.log("Adding ingredient", data);
       this.add.emit(data);
     }
+  }
+
+  closePicker(): void {
+    this.close.emit();
   }
 
 }
