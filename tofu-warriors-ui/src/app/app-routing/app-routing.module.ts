@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
-import { FollowersPageComponent } from '../followers-page/followers-page.component';
+
 import { LoginComponent } from '../login/login.component';
 import { RecipeSearchPageComponent } from '../recipe-search-page/recipe-search-page.component';
 import { RecipesListComponent } from '../recipes-list/recipes-list.component';

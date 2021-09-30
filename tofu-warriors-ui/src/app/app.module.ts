@@ -16,7 +16,7 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
-import { FollowersPageComponent } from './followers-page/followers-page.component';
+import { InflencerActivitiesComponent } from './inflencer-activities/inflencer-activities.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { FollowersPageComponent } from './followers-page/followers-page.componen
     RecipeDisplayComponent,
     RecipesListComponent,
     RecipeSearchTagPickerComponent,
-    FollowersPageComponent
+    InflencerActivitiesComponent,
+
   ],
   imports: [
     BrowserModule,

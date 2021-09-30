@@ -60,5 +60,10 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			return ConvertToModel(user);
 		}
 
+		//get all influencer's info based on userId
+
+
+
+
 	}
 }
