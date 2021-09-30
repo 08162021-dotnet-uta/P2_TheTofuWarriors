@@ -16,7 +16,16 @@ import { RecipeDisplayComponent } from './recipe-display/recipe-display.componen
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
+<<<<<<< HEAD
 import { InflencerActivitiesComponent } from './inflencer-activities/inflencer-activities.component';
+=======
+import { RecipeViewPageComponent } from './recipe-view-page/recipe-view-page.component';
+import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.component';
+import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
+import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker.component';
+>>>>>>> main
 
 @NgModule({
   declarations: [
@@ -31,8 +40,17 @@ import { InflencerActivitiesComponent } from './inflencer-activities/inflencer-a
     RecipeDisplayComponent,
     RecipesListComponent,
     RecipeSearchTagPickerComponent,
+<<<<<<< HEAD
     InflencerActivitiesComponent,
 
+=======
+    RecipeViewPageComponent,
+    RecipeEditPageComponent,
+    RecipeCreatePageComponent,
+    RecipeBasePageComponent,
+    RecipeEditComponent,
+    IngredientPickerComponent
+>>>>>>> main
   ],
   imports: [
     BrowserModule,

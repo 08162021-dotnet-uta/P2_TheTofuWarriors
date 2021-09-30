@@ -17,8 +17,11 @@ namespace TofuWarrior.Model.ViewModels
 		/************************* "Extension" properties for returning extra data from controllers **************************/
 		public string IngredientName { get; set; }
 		public string IngredientDescription { get; set; }
+		public ViewModelMeasurement MeasureUnit { get; set; }
+		/*
 		public string MeasureUnit { get; set; }
 		public string MeasureDescription { get; set; }
+		*/
 
     }
 }

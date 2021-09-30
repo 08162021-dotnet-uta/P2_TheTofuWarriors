@@ -25,8 +25,12 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				IngredientName = ingredient.food,
 				IngredientDescription = ingredient.text,
 				MeasureUnitId = 0,
-				MeasureUnit = ingredient.measure,
-				MeasureDescription = ingredient.measure
+				MeasureUnit = new ViewModelMeasurement()
+				{
+					MeasureUnitId = 0,
+					Description = ingredient.measure,
+					Unit = ingredient.measure
+				}
 			};
 		}
 		public static ViewModelRecipe ConvertToModel(ApiModel.Recipe apiModel)

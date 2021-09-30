@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import { RouterModule,Routes } from '@angular/router';
 
+=======
+import { RouterModule, Routes } from '@angular/router';
+>>>>>>> main
 import { LoginComponent } from '../login/login.component';
+import { RecipeBasePageComponent } from '../recipe-base-page/recipe-base-page.component';
+import { RecipeCreatePageComponent } from '../recipe-create-page/recipe-create-page.component';
+import { RecipeEditPageComponent } from '../recipe-edit-page/recipe-edit-page.component';
 import { RecipeSearchPageComponent } from '../recipe-search-page/recipe-search-page.component';
+import { RecipeViewPageComponent } from '../recipe-view-page/recipe-view-page.component';
 import { RecipesListComponent } from '../recipes-list/recipes-list.component';
 import { SignupComponent } from '../signup/signup.component';
 import { UserHomePageComponent } from '../user-home-page/user-home-page.component';
@@ -15,7 +23,20 @@ const routes: Routes = [
   { path: 'home', component: UserHomePageComponent },
   { path: 'recipeSearch', component: RecipeSearchPageComponent },
   { path: 'user/:userId/profile', component: UserProfilePageComponent },
+<<<<<<< HEAD
   { path: 'recipies', component: RecipesListComponent }
+=======
+  { path: 'recipies', component: RecipesListComponent },
+  { path: 'recipies/create', component: RecipeCreatePageComponent },
+  {
+    path: 'recipies/:recipeId', component: RecipeBasePageComponent,
+    children: [
+      { path: 'view', component: RecipeViewPageComponent },
+      { path: 'edit', component: RecipeEditPageComponent },
+      { path: 'clone', component: RecipeCreatePageComponent }
+    ]
+  }
+>>>>>>> main
 ];
 
 @NgModule({
