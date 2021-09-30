@@ -21,7 +21,7 @@ export class UserDisplayComponent implements OnInit {
   loadUsers(): void {
     console.log("loading users 2");
     this.users.getUsers().subscribe(data => {
-      console.log(`Got user data: ${data}`)
+      console.log(`Got user data: `, data)
       this.usersList = data
     });
   }

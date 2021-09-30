@@ -1,15 +1,16 @@
+import { Ingredient } from './ingredient';
 import { User } from './user';
 
 export interface Recipe {
   recipeId: number;
   creatorUserId: number;
-  //creator: User;
+  creator: User | null;
   name: string;
   instructions: string;
   creationTime: Date;
   isExternal: boolean;
   imageUrl: string;
   apiKey: string;
-  ingredients: any[];
+  ingredients: Ingredient[];
   tags: any[];
 }
