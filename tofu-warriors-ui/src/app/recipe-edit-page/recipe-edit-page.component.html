@@ -1,0 +1,9 @@
+
+<h2>Edit Recipe</h2>
+
+<div *ngIf="currentUser">
+  <app-recipe-edit [recipe]="recipe" (save)="saveChanges($event)"></app-recipe-edit>
+</div>
+<div *ngIf="!currentUser">
+  <p>You must be logged in to edit a recipe</p>
+</div>

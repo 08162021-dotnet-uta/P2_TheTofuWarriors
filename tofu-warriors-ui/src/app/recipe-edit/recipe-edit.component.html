@@ -1,0 +1,28 @@
+
+<div *ngIf="recipe">
+  <label for="recipe_name">Name: </label>
+  <input id="recpie_name" name="recipe_name" [(ngModel)]="recipe.name" />
+  <!-- TODO: get user info from recipe object? -->
+  <p>Created by: <span *ngIf="recipe.creator">{{recipe.creator.firstName}} {{recipe.creator.lastName}}</span></p>
+  <p>Ingredients:</p>
+  <ul>
+    <li *ngFor="let ingredient of recipe.ingredients">
+      {{ingredient.quantity}} {{ingredient.measureUnit?.description}} {{ingredient.ingredientName}}
+      <button (click)="removeIngredient(ingredient)">Remove</button>
+    </li>
+  </ul>
+  <div *ngIf="showIngredientPicker">
+    <app-ingredient-picker (add)="addIngredient($event)" (close)="toggleIngredientPicker()"></app-ingredient-picker>
+  </div>
+  <div *ngIf="!showIngredientPicker">
+    <button (click)="toggleIngredientPicker()">Add Ingredient</button>
+  </div>
+  <p>Instructions:</p>
+  <textarea class="recipe-instructions" name="recipe-instructions" [(ngModel)]="recipe.instructions"></textarea>
+  <div class="recipe-edit-actions">
+
+    <button (click)="saveRecipe()">Save</button>
+    <button (click)="cancelEdits()">Cancel</button>
+  </div>
+</div>
+

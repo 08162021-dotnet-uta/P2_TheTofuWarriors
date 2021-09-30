@@ -30,8 +30,8 @@ namespace TofuWarrior.BusinessLogic.Repositories
         {
             var ingredient = new Ingredient()
             {
-                Name = data.Name,
-                Description = data.Description
+                Name = data.IngredientName,
+                Description = data.IngredientDescription
             };
             _db.Ingredients.Add(ingredient);
             await _db.SaveChangesAsync();

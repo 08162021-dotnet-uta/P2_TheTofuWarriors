@@ -21,7 +21,12 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 import { RecipesListComponent } from './recipes-list/recipes-list.component';
 
 import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recipe-search-tag-picker.component';
->>>>>>> ebd37682e4bf12f7570006dd8f16bb0baabefac1
+import { RecipeViewPageComponent } from './recipe-view-page/recipe-view-page.component';
+import { RecipeEditPageComponent } from './recipe-edit-page/recipe-edit-page.component';
+import { RecipeCreatePageComponent } from './recipe-create-page/recipe-create-page.component';
+import { RecipeBasePageComponent } from './recipe-base-page/recipe-base-page.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { IngredientPickerComponent } from './ingredient-picker/ingredient-picker.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +45,13 @@ import { RecipeSearchTagPickerComponent } from './recipe-search-tag-picker/recip
 
 =======
     RecipesListComponent,
-    RecipeSearchTagPickerComponent
->>>>>>> ebd37682e4bf12f7570006dd8f16bb0baabefac1
+    RecipeSearchTagPickerComponent,
+    RecipeViewPageComponent,
+    RecipeEditPageComponent,
+    RecipeCreatePageComponent,
+    RecipeBasePageComponent,
+    RecipeEditComponent,
+    IngredientPickerComponent
   ],
   imports: [
     BrowserModule,
