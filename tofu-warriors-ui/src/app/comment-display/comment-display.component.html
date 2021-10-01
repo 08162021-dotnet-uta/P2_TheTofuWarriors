@@ -38,7 +38,7 @@
                 <button class="btn-add-comment btn btn-outline-success btn-sm" (click)="showAddComment=true">+ Comment</button>
               </div>
 							<div class="comment-replies bg-light p-3 mt-3 rounded" *ngFor="let comment of comment.subComments">
-								<app-comment-display [loadComment]="loadComment" [comment]="comment"></app-comment-display>
+								<app-comment-display [users]="users" [loadComment]="loadComment" [comment]="comment"></app-comment-display>
 							</div>
 						</div>
 					</div>
