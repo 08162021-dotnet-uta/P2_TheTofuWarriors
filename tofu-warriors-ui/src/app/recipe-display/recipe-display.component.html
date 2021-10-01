@@ -1,6 +1,4 @@
-
-
-<div *ngIf="recipe">
+<div class="container" *ngIf="recipe">
   <h4>{{recipe.name}}</h4>
   <!-- TODO: get user info from recipe object? -->
   <p *ngIf="recipe.creator">Created by: {{recipe.creator.firstName}} {{recipe.creator.lastName}}</p>

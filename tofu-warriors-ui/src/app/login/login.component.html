@@ -1,26 +1,30 @@
 <div id="login">
-	<h1>Welcome Back!</h1>
 
-	<form>
+	<div class="container mt-3">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-4">
+        <h1>Welcome Back!</h1>
+        <div>
+          <label for="username">
+            Username<span>:</span>
+          </label>
+        </div>
+        <div>
+          <input id="username" [(ngModel)]="userName" type="text" name="userName" required />
+        </div>
 
-		<div class="field-wrap">
-			<label>
-				UserName<span>:</span>
-			</label>
-			<input [(ngModel)]="userName" type="text" name="userName" required />
-		</div>
+        <div>
+          <label for="password">
+            Password<span>:</span>
+          </label>
+        </div>
+        <div class="mb-3">
+          <input id="password" [(ngModel)]="password" name="password" type="password" required />
+        </div>
 
-		<div class="field-wrap">
-			<label>
-				Password<span>:</span>
-			</label>
-			<input [(ngModel)]="password" name="password" type="password" required />
-		</div>
-
-
-
-		<button (click)="login()" class="btn btn-primary btn-sm">Log In</button>
-
-	</form>
+        <button (click)="login()" class="btn btn-primary btn-sm">Log In</button>
+      </div>
+    </div>
+  </div>
 
 </div>

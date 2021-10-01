@@ -49,6 +49,7 @@ export class CommentDisplayComponent implements OnInit {
     this.commentService.newComment(comment).subscribe(data => {
     if(this.loadComment){
       this.loadComment(comment.recipeId)
+      this.showAddComment = false;
     }
     })
     

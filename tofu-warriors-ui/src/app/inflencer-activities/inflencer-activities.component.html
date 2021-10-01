@@ -1,7 +1,7 @@
 <div>
 	<h1 *ngIf="userName">{{userName}}'s recipe</h1>
-	<ul>
-		<li *ngFor="let recipe of userRecipes">
+	<ul class="list-group">
+		<li class="list-group-item" *ngFor="let recipe of userRecipes">
 			<app-recipe-display [recipe]="recipe"></app-recipe-display>
 		</li>
 	</ul>
