@@ -1,3 +1,4 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecipeBasePageComponent } from './recipe-base-page.component';
@@ -9,6 +10,7 @@ describe('RecipeBasePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RecipeBasePageComponent ]
+      
     })
     .compileComponents();
   });
