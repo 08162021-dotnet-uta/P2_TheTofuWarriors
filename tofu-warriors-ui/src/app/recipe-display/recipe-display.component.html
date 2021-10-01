@@ -3,16 +3,14 @@
   <!-- TODO: get user info from recipe object? -->
   <p *ngIf="recipe.creator">Created by: {{recipe.creator.firstName}} {{recipe.creator.lastName}}</p>
   <p>Ingredients:</p>
-  <ul>
-    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.measureUnit?.description}}
-      {{ingredient.ingredientName}}</li>
+  <ul class="columnmiddle">
+    <li class="middle" *ngFor="let ingredient of recipe.ingredients">{{ingredient.quantity}} {{ingredient.measureUnit?.description}} {{ingredient.ingredientName}}</li>
   </ul>
   <p *ngIf="recipe.tags">Tags:</p>
-  <div class="container-fluid" *ngIf="recipe.tags">
+  <div class="container-fluid columnside" *ngIf="recipe.tags">
     <div class="row">
-      <div class="col-6">
-        <span *ngFor="let tag of recipe.tags" class="badge  mx-2"
-          [ngClass]="getTagClass(tag.tagType)">{{tag.name}}</span>
+      <div class="column">
+        <span *ngFor="let tag of recipe.tags" class="badge  mx-2" [ngClass]="getTagClass(tag.tagType)">{{tag.name}}</span>
       </div>
     </div>
     <!--

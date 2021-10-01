@@ -14,10 +14,10 @@ export class RecipeDisplayComponent implements OnInit {
   constructor(
     private usersService: UsersService
   ) { }
-
+  
   @Input() recipe: Recipe | null = null;
   @Input() displayComments: boolean = true;
-
+  
   users: User[] = [];
 
   subscriptions: Subscription[] = [];

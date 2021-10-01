@@ -3,8 +3,7 @@
   <button routerLink="/recipies/create">New Recipe</button>
   <ul class="recipes">
     <li *ngFor="let recipe of recipies" routerLink="/recipies/{{recipe.recipeId}}/view">
-      <span>{{recipe.name}} </span>
-
+      <span>{{recipe.name}}</span>
     </li>
   </ul>
 
