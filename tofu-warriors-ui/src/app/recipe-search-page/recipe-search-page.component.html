@@ -2,6 +2,7 @@
 
 <div>
   <h1>Find a recipe: </h1>
+
   <div class="recipe-search">
     <app-recipe-search-tag-picker (addTag)="addSearchTag($event)" (addTerm)="addSearchTerm($event)"></app-recipe-search-tag-picker>
     <!-- current list of terms -->
@@ -24,6 +25,7 @@
     <button *ngIf="results.length" (click)="clearResults()">Clear</button>
   </div>
 
+  <div id="edamam-badge" data-color="white"></div>
   <div *ngIf="results.length">
     <h4>Results:</h4>
     <div class="recipe-search-results">
