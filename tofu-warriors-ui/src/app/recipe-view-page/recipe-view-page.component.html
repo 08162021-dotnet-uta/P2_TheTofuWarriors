@@ -1,8 +1,10 @@
-
-<h2>View Recipe</h2>
-<div>
-  <button (click)="goBack()">Back</button>
-  <button *ngIf="recipeEditable" (click)="editRecipe()">Edit</button>
-  <button *ngIf="!recipeEditable" (click)="cloneRecipe()">Add To My Recipes</button>
-  <app-recipe-display [recipe]="recipe"></app-recipe-display>
+<div class="container">
+  <h2>View Recipe</h2>
+  <div>
+    <button (click)="goBack()" class="btn btn-success ">Back</button>
+    <button *ngIf="recipeEditable" class="recipeButton btn btn-success " (click)="editRecipe()">Edit</button>
+    <button *ngIf="!recipeEditable" class="recipeButton btn btn-success " (click)="cloneRecipe()">Add To My
+      Recipes</button>
+    <app-recipe-display [recipe]="recipe"></app-recipe-display>
+  </div>
 </div>

@@ -1,16 +1,31 @@
-<div>
+<div class="row">
+  <!-- 
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let u of usersList">
+     
+      UserName:<a href="javascript:void(0)" (click)="showActivities(u)"> {{u.userName}}</a>
+      &nbsp; <button *ngIf="!hasFollowed(u.userId)" (click)="follow(u)">Follow</button>
+      &nbsp; <button *ngIf="hasFollowed(u.userId)" (click)="unfollow(u)">UnFollow</button>
 
-<ul>
-  <li *ngFor="let u of usersList">
-   <!-- <span>FirstName:</span> {{u.firstName}}
-   <span>LastName:</span>   {{u.lastName}} -->
-UserName:<a href="javascript:void(0)" (click)="showActivities(u)"> {{u.userName}}</a> 
-&nbsp; <button *ngIf="!hasFollowed(u.userId)" (click)="follow(u)" >Follow</button>
-&nbsp; <button *ngIf="hasFollowed(u.userId)" (click)="unfollow(u)">UnFollow</button>
-  </li>
-</ul>
-<div *ngIf="userRecipeList && user"  >
-  <app-inflencer-activities [userRecipes]="userRecipeList" [userName]="influencerName"></app-inflencer-activities>
-</div>
+
+    </li>
+  </ul> -->
+  <div class="row">
+
+    <div class="col-sm-4" *ngFor="let u of usersList">
+      <div class="card influencer-card">
+        <div class="card-body">
+          <a href="javascript:void(0)" class="card-title" (click)="showActivities(u)">{{u.userName}}</a>
+          <p class="card-text">My name is {{u.firstName}}, my email is {{u.email}}. Follow Me!</p>
+          <button class="btn btn-primary" *ngIf="!hasFollowed(u.userId)" (click)="follow(u)">Follow</button>
+          <button class="btn btn-primary" *ngIf="hasFollowed(u.userId)" (click)="unfollow(u)">UnFollow</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="userRecipeList && user">
+    <app-inflencer-activities [userRecipes]="userRecipeList" [userName]="influencerName"></app-inflencer-activities>
+  </div>
 
 </div>
