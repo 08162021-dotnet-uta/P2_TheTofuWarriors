@@ -1,4 +1,5 @@
 <div *ngIf="comment">
+  <span *ngIf="user">{{user.userName}} </span> <span *ngIf="!user">anonymous</span> {{comment.commentTime | date : 'short'}}:
 	{{comment.commentText}}
 	<div *ngIf="showAddComment">
 		<app-add-comment (saveComment)="save($event)" (cancelEdit)="cancel()"></app-add-comment>
@@ -9,7 +10,7 @@
 	</div>
 	<ul>
 		<li *ngFor="let comment of comment.subComments">
-			<app-comment-display [loadComment]="loadComment" [comment]="comment"></app-comment-display>
+			<app-comment-display [users]="users" [loadComment]="loadComment" [comment]="comment"></app-comment-display>
 		</li>
 	</ul>
 

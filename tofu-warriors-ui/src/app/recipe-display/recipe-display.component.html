@@ -25,5 +25,5 @@
   </div>
   <p>Instructions:</p>
   <p>{{recipe.instructions}}</p>
-  <app-recipe-comment *ngIf="displayComments" [recipeId]="recipe.recipeId"></app-recipe-comment>
+  <app-recipe-comment *ngIf="displayComments" [users]="users" [recipeId]="recipe.recipeId"></app-recipe-comment>
 </div>
