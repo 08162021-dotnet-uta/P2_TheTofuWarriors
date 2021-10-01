@@ -67,6 +67,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
                 {
                     CommentId = comment.CommentId,
                     CommentText = comment.CommentText,
+					CommentTime = comment.CommentTime,
                     PrevCommentId = comment.PrevCommentId,
                     RecipeId = comment.RecipeId,
                     UserId = comment.UserId,

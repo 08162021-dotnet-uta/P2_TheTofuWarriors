@@ -25,6 +25,7 @@ export class RecipeCommentComponent implements OnInit {
 
   @Input() comments: Comment[] = [];
   @Input() recipeId: number = 0;
+  @Input() users: User[] = [];
 
   ngOnInit(): void {
   this.loadComment(this.recipeId)

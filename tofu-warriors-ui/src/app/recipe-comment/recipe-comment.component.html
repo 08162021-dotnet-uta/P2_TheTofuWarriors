@@ -3,7 +3,7 @@
 <ul>
   <li *ngFor="let c of comments">
     <!-- {{c.commentText}} -->
-    <app-comment-display [loadComment]="loadComment.bind(this)" [comment]="c"></app-comment-display>
+    <app-comment-display [users]="users" [loadComment]="loadComment.bind(this)" [comment]="c"></app-comment-display>
   </li>
 
 </ul>
