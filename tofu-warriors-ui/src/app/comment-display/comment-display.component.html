@@ -8,7 +8,7 @@
 	</div>
 	<ul>
 		<li *ngFor="let comment of comment.subComments">
-			<app-comment-display [loadComment]="loadComment" [comment]="comment"></app-comment-display>
+			<app-comment-display [users]="users" [loadComment]="loadComment" [comment]="comment"></app-comment-display>
 		</li>
 	</ul>
 
@@ -29,10 +29,14 @@
 						<div class="flex-grow-1 ms-2 ms-sm-3">
 							<div class="comment-meta d-flex align-items-baseline">
 
+                <span *ngIf="user">{{user.userName}} </span> <span *ngIf="!user">anonymous </span> &mdash; {{comment.commentTime | date : 'short'}}:
 							</div>
 							<div class="comment-body" *ngIf="comment">
 								{{comment.commentText}}
 							</div>
+              <div *ngIf="!showAddComment">
+                <button class="btn-add-comment btn btn-outline-success btn-sm" (click)="showAddComment=true">+ Comment</button>
+              </div>
 							<div class="comment-replies bg-light p-3 mt-3 rounded" *ngFor="let comment of comment.subComments">
 								<app-comment-display [loadComment]="loadComment" [comment]="comment"></app-comment-display>
 							</div>
@@ -43,9 +47,6 @@
 
 			<div *ngIf="showAddComment">
 				<app-add-comment (saveComment)="save($event)" (cancelEdit)="cancel()"></app-add-comment>
-			</div>
-			<div *ngIf="!showAddComment">
-				<button class="btn-add-comment btn btn-outline-success btn-sm" (click)="showAddComment=true">+ Comment</button>
 			</div>
 
 		</div>
