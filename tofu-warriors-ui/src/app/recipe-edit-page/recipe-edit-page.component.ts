@@ -54,7 +54,6 @@ export class RecipeEditPageComponent implements OnInit {
     this.subscriptions.push(this.recipeService.saveUserRecipe(this.recipe, this.currentUser).subscribe(recipe => {
       this.recipe = recipe;
       let dest = `/recipies/${recipe.recipeId}/view`;
-      this.router.navigate([dest]);
       this.router.navigate([dest], { replaceUrl: true });
       //this.location.replaceState(dest);
     }));

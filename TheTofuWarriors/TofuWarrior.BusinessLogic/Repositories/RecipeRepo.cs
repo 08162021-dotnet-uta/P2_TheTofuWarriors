@@ -59,6 +59,21 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			return result;
 		}
 
+		private async Task<List<RecipeTag>> CreateRecipeTags(ViewModelRecipe recipe)
+		{
+			List<RecipeTag> result = new();
+			foreach (var tag in recipe.Tags)
+			{
+				Tag dbTag = await (from t in _context.Tags where t.TagType == tag.TagType && t.Name == tag.Name select t).FirstAsync();
+				result.Add(new RecipeTag()
+				{
+					TagId = dbTag.TagId,
+					Tag = dbTag
+				});
+			}
+			return result;
+		}
+
 		/// <summary>
 		/// add/update recipe in database (updates all linking tables)
 		/// </summary>
@@ -84,12 +99,13 @@ namespace TofuWarrior.BusinessLogic.Repositories
 			if (recipe.RecipeId != 0)
 			{
 				_context.RecipeIngredients.RemoveRange(newRecipe.RecipeIngredients);
-				await _context.SaveChangesAsync();
+				_context.RecipeTags.RemoveRange(newRecipe.RecipeTags);
 				newRecipe.RecipeIngredients.Clear();
+				newRecipe.RecipeTags.Clear();
+				await _context.SaveChangesAsync();
 			}
 			newRecipe.RecipeIngredients = await CreateRecipeIngredients(recipe);
-				//TODO: make tags work
-			newRecipe.RecipeTags = new List<RecipeTag>();
+			newRecipe.RecipeTags = await CreateRecipeTags(recipe);
 			newRecipe.CreatorUser = dbUser;
 			if (recipe.RecipeId == 0)
 			{
@@ -108,6 +124,7 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				_context.UserRecipes.Add(newUR);
 			}
 			_context.RecipeIngredients.AddRange(newRecipe.RecipeIngredients);
+			_context.RecipeTags.AddRange(newRecipe.RecipeTags);
 			await _context.SaveChangesAsync();
 			return Mapper.ConvertToModel(newRecipe);
 		}
@@ -127,7 +144,9 @@ namespace TofuWarrior.BusinessLogic.Repositories
 				.Include(r => r.RecipeIngredients)
 				.ThenInclude(ri => ri.Ingredient)
 				.Include(r => r.RecipeIngredients)
-				.ThenInclude(ri => ri.MeasureUnit);
+				.ThenInclude(ri => ri.MeasureUnit)
+				.Include(r => r.RecipeTags)
+				.ThenInclude(rt => rt.Tag);
 		}
 			public async Task<List<ViewModelRecipe>> GetUserRecipes(int userId)
 		{

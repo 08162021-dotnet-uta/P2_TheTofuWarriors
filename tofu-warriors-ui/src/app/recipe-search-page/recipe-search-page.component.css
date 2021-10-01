@@ -1,5 +1,6 @@
 
 .recipe-search-results {
-    max-height: 400px;
-    overflow: scroll;
+    max-height: 55vh;
+    overflow-y: scroll;
+    border: 1px solid black;
 }

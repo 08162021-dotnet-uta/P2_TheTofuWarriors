@@ -28,7 +28,7 @@
     <h4>Results:</h4>
     <div class="recipe-search-results">
       <div *ngFor="let recipe of results">
-        <app-recipe-display [recipe]="recipe"></app-recipe-display>
+        <app-recipe-display [displayComments]="false" [recipe]="recipe"></app-recipe-display>
       </div>
     </div>
   </div>

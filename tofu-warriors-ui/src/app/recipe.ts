@@ -1,4 +1,5 @@
 import { Ingredient } from './ingredient';
+import { RecipeTag } from './search-term';
 import { User } from './user';
 
 export interface Recipe {
@@ -12,5 +13,5 @@ export interface Recipe {
   imageUrl: string;
   apiKey: string;
   ingredients: Ingredient[];
-  tags: any[];
+  tags: RecipeTag[];
 }

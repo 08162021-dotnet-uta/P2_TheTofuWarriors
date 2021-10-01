@@ -24,9 +24,9 @@ export class RecipeSearchTagPickerComponent implements OnInit {
     this.addTerm.emit(name);
   }
 
-  addSearchTag(tagLabel: string): void {
-    console.log("adding search term", tagLabel);
-    let tag = TagInfo.getTagForLabel(tagLabel);
+  addSearchTag(tag: RecipeTag): void {
+    console.log("adding search term", tag);
+    //let tag = TagInfo.getTagForLabel(tagLabel);
     this.addTag.emit(tag);
   }
 
